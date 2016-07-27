@@ -1,0 +1,49 @@
+.container {
+    background: url('../../img/bg-superman.jpg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    margin: auto;
+    position: relative;
+}
+.two-btn {
+    width: 100%;
+    display: inline-flex;
+}
+.tbtn {
+    width: 100%;
+}
+//toolbar element
+.toolbar-background {
+    background: #484C61;
+}
+//navigation drawer icon
+.bar-button {
+    color: white;
+}
+//search bar element
+.toolbar ion-searchbar .searchbar-input {
+    background: white;
+}
+
+//add alarm section
+.addAlarm {
+    width: 100%;
+    height: 30%;
+    margin-top: 70%;
+    border-top: 1px solid white;
+}
+.addAlarmBtn {
+    width: 50%;
+    background: transparent;
+    margin: 0 auto;
+    margin-top: 20%;
+    display: -webkit-box;
+    padding: 3em;
+    -webkit-transition: padding 0.1s;
+    transition: padding 0.1s;
+}
+.addAlarmBtn.disable-hover.button.button-default.activated {
+    background-color: transparent;
+    padding: 2.9em;
+}

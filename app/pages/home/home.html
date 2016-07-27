@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar class="navbar">
+    <button menuToggle><ion-icon name="menu"></ion-icon></button>
+    <ion-searchbar class="search-bar"
+      [(ngModel)]="myInput"
+      [showCancelButton]="shouldShowCancel"
+      (ionInput)="onInput($event)"
+      (ionCancel)="onCancel($event)">
+    </ion-searchbar>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="container">
+    <div class="two-btn">
+      <button class="tbtn" primary (click)="startRecord();">Record</button>
+      <button class="tbtn" danger (click)="stopRecord();">Stop</button><br>
+    </div>
+    <button block (click)="startPlay();">Play</button>
+
+    <div class="addAlarm">
+        <button class="addAlarmBtn"><img src="img/record.png"/></button>
+    </div>
+</ion-content>

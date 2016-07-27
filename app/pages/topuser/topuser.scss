@@ -1,0 +1,21 @@
+.container {
+    background: url('../../img/bg-superman.jpg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    margin: auto;
+    position: relative;
+}
+
+//toolbar element
+.toolbar-background {
+    background: #484C61;
+}
+//navigation drawer icon
+.bar-button {
+    color: white;
+}
+//search bar element
+.toolbar ion-searchbar .searchbar-input {
+    background: white;
+}
