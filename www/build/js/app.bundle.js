@@ -12,7 +12,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var ionic_angular_1 = require('ionic-angular');
 var ionic_native_1 = require('ionic-native');
-var home_1 = require('./pages/home/home');
 var tabs_1 = require('./pages/tabs/tabs');
 var MyApp = (function () {
     function MyApp(platform, menu) {
@@ -22,11 +21,11 @@ var MyApp = (function () {
         this.initializeApp();
         // set our app's pages
         this.pages = [
-            { title: 'Home', component: home_1.HomePage },
-            { title: 'Store', component: home_1.HomePage },
-            { title: 'Setting', component: home_1.HomePage },
-            { title: 'About', component: home_1.HomePage },
-            { title: 'Contact Us', component: home_1.HomePage }
+            { title: 'Home', component: tabs_1.TabsPage },
+            { title: 'Store', component: tabs_1.TabsPage },
+            { title: 'Setting', component: tabs_1.TabsPage },
+            { title: 'About', component: tabs_1.TabsPage },
+            { title: 'Contact Us', component: tabs_1.TabsPage }
         ];
     }
     MyApp.prototype.initializeApp = function () {
@@ -59,7 +58,7 @@ ionic_angular_1.ionicBootstrap(MyApp, [], {
     tabbarPlacement: "bottom"
 });
 
-},{"./pages/home/home":2,"./pages/tabs/tabs":4,"@angular/core":153,"ionic-angular":417,"ionic-native":444}],2:[function(require,module,exports){
+},{"./pages/tabs/tabs":4,"@angular/core":153,"ionic-angular":417,"ionic-native":444}],2:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -167,21 +166,78 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var ionic_angular_1 = require('ionic-angular');
-/*
-  Generated class for the RecordingPage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 var RecordingPage = (function () {
-    function RecordingPage(nav) {
+    function RecordingPage(nav, platform, menu) {
         this.nav = nav;
+        this.platform = platform;
+        this.menu = menu;
+        this._platform = platform;
     }
+    //record audio function
+    RecordingPage.prototype.startRecord = function () {
+        if (this._platform.is('ios'))
+            var src = 'testing.wav';
+        else
+            var src = 'testing.amr';
+        this.mediaRec = new Media(src, 
+        // success callback
+        // success callback
+        function () {
+            console.log("recordAudio():Audio Success");
+        }, 
+        // error callback
+        // error callback
+        function (err) {
+            console.log("recordAudio():Audio Error: " + err.code);
+        });
+        // Record audio
+        this.mediaRec.startRecord('recorded-audio-' + 1);
+    };
+    //stop recording audio
+    RecordingPage.prototype.stopRecord = function () {
+        this.mediaRec.stopRecord();
+        this.mediaRec.release();
+    };
+    //play the audio
+    RecordingPage.prototype.playRecord = function () {
+        // Play the audio file at url
+        if (this._platform.is('ios'))
+            var url = "testing.wav";
+        else
+            var url = this.getPathFileRecordAudio() + "testing.amr";
+        var my_media = new Media(url, 
+        // success callback
+        // success callback
+        function () {
+            console.log("playAudio(): Success");
+        }, 
+        // error callback
+        // error callback
+        function (err) {
+            console.log("playAudio(): Error: " + err);
+        });
+        console.log("Start Playing Audio ...");
+        my_media.play();
+    };
+    //get path function
+    RecordingPage.prototype.getPathFileRecordAudio = function () {
+        if (this._platform.is('ios')) {
+            var path = cordova.file.tempDirectory;
+            ;
+            console.log("iOS Platform");
+            return path;
+        }
+        else {
+            var path = cordova.file.externalRootDirectory;
+            console.log("Android Platform");
+            return path;
+        }
+    };
     RecordingPage = __decorate([
         core_1.Component({
             templateUrl: 'build/pages/recording/recording.html',
         }), 
-        __metadata('design:paramtypes', [ionic_angular_1.NavController])
+        __metadata('design:paramtypes', [ionic_angular_1.NavController, ionic_angular_1.Platform, ionic_angular_1.MenuController])
     ], RecordingPage);
     return RecordingPage;
 }());

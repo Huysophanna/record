@@ -1,0 +1,24 @@
+//top user bar section
+.displayTopUser {
+    width: 100%;
+    height: 10%;
+    display: inline-flex;
+}
+.topUserImg {
+    width: 14%;
+    height: 100%;
+    margin-top: 0.8%;
+    margin-left: 4%;
+}
+.displayTopName {
+    margin-top: 5%;
+    width: auto;
+    margin-left: 5%;
+    text-align: center;
+}
+.displayTopScore {
+    margin-top: 5%;
+    text-align: right;
+    margin-left: auto;
+    margin-right: 4%;
+}

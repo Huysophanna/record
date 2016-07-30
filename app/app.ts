@@ -19,11 +19,11 @@ export class MyApp {
 
     // set our app's pages
     this.pages = [
-      { title: 'Home', component: HomePage},
-      { title: 'Store', component: HomePage},
-      { title: 'Setting', component: HomePage},
-      { title: 'About', component: HomePage},
-      { title: 'Contact Us', component: HomePage}
+      { title: 'Home', component: TabsPage},
+      { title: 'Store', component: TabsPage},
+      { title: 'Setting', component: TabsPage},
+      { title: 'About', component: TabsPage},
+      { title: 'Contact Us', component: TabsPage}
     ];
   }
 

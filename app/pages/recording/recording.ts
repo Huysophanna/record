@@ -1,19 +1,85 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Platform, Page, Events, MenuController } from 'ionic-angular';
+import {MediaPlugin} from 'ionic-native';
+declare var navigator: any;
+declare var cordova: any;
+declare var Media: any;
 
-/*
-  Generated class for the RecordingPage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   templateUrl: 'build/pages/recording/recording.html',
 })
 export class RecordingPage {
+    private _platform: Platform;
+    private _fileRecord: MediaPlugin;
+    
+    private _pathFile: string;
+    private _nameFile: string;
+    private mediaRec;
 
-  constructor(private nav: NavController) {
-
+  constructor(private nav: NavController, private platform: Platform, private menu: MenuController) {
+    this._platform = platform;
   }
+
+  //record audio function
+  public startRecord(): void {
+       if (this._platform.is('ios'))
+           var src = 'testing.wav';
+       else
+           var src = 'testing.amr';
+       this.mediaRec = new Media(src,
+         // success callback
+         function() {
+             console.log("recordAudio():Audio Success");
+         },
+
+         // error callback
+         function(err) {
+             console.log("recordAudio():Audio Error: "+ err.code);
+         }
+       );
+
+      // Record audio
+      this.mediaRec.startRecord('recorded-audio-'+ 1);
+    }
+
+    //stop recording audio
+    public stopRecord(): void {
+       this.mediaRec.stopRecord();
+       this.mediaRec.release();
+    }
+
+    //play the audio
+    private playRecord() {
+      // Play the audio file at url
+      if (this._platform.is('ios'))
+           var url = "testing.wav";
+       else
+           var url = this.getPathFileRecordAudio() + "testing.amr";
+      var my_media = new Media(url,
+          // success callback
+          function () {
+              console.log("playAudio(): Success");
+          },
+          // error callback
+          function (err) {
+              console.log("playAudio(): Error: " + err);
+          }
+      );
+      console.log("Start Playing Audio ...");
+      my_media.play();
+    }
+
+    //get path function
+    private getPathFileRecordAudio(): string {
+      if (this._platform.is('ios')) {
+        let path: string = cordova.file.tempDirectory;;
+        console.log("iOS Platform");
+        return path;
+      } else {
+        let path: string = cordova.file.externalRootDirectory;
+        console.log("Android Platform");
+        return path;
+      }
+    }
 
 }

@@ -11,13 +11,26 @@
 </ion-header>
 
 <ion-content padding class="container">
-    <div class="two-btn">
-      <button class="tbtn" primary (click)="startRecord();">Record</button>
-      <button class="tbtn" danger (click)="stopRecord();">Stop</button><br>
-    </div>
-    <button block (click)="startPlay();">Play</button>
+    
+    <!--display alarm section-->
+    <div class="displayAlarm">
+      <!--if no alarms available-->
+      <div class="noAlarm">
+        <p class="noAlarmLabel">No Alarm</p>
+        <ion-icon name="alarm"></ion-icon>
+      </div>
 
+    </div>
+
+    <!--top user section-->
+    <div class="displayTopUser">
+      <div class="topUserImg"><img src="img/white-circle-md.png"/></div>
+      <div class="displayTopName">Username</div>
+      <div class="displayTopScore">203013 Points</div>
+    </div>
+
+    <!--add alarm section-->
     <div class="addAlarm">
-        <button class="addAlarmBtn"><img src="img/record.png"/></button>
+        <button class="addAlarmBtn"><img src="img/add-alarm.png"/></button>
     </div>
 </ion-content>

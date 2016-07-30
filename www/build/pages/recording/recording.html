@@ -10,5 +10,17 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding class="container">
-
+  <div class="recordProgress">
+    <div class="recordBorder">
+      <img src="img/record-border.png"/>
+    </div>
+    <div class="recordImg">
+      <ion-icon name="microphone"></ion-icon>
+    </div>
+  </div>
+  <div class="recordBtns">
+    <button (click)="stopRecord();" class="stopBtn"><img src="img/stop.png"/></button>
+    <button (click)="startRecord();" class="startBtn"><img src="img/start.png"/></button>
+    <button (click)="playRecord();" class="recordingsBtn"><img src="img/recordings.png"/></button>
+  </div>
 </ion-content>

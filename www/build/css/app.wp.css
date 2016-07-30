@@ -9170,25 +9170,19 @@ body {
   background-color: #fff; }
 
 .container {
+  color: white;
   background: url("../../img/bg-superman.jpg");
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   background-position: center;
   margin: auto;
   position: relative; }
 
-.two-btn {
-  width: 100%;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex; }
-
-.tbtn {
-  width: 100%; }
-
 .toolbar-background {
   background: #484C61; }
+
+.toolbar-content {
+  color: white; }
 
 .bar-button {
   color: white; }
@@ -9196,25 +9190,68 @@ body {
 .toolbar ion-searchbar .searchbar-input {
   background: white; }
 
+.displayAlarm {
+  width: 100%;
+  height: 59%;
+  display: inline-block;
+  border-bottom: 1px solid white; }
+
+.noAlarm {
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 30%;
+  display: block;
+  font-size: 3em;
+  text-align: center; }
+
+.noAlarm .noAlarmLabel {
+  font-size: 35%;
+  color: white; }
+
+.displayTopUser {
+  width: 100%;
+  height: 10%;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex; }
+
+.topUserImg {
+  width: 14%;
+  height: 100%;
+  margin-top: 0.8%;
+  margin-left: 4%; }
+
+.displayTopName {
+  margin-top: 5%;
+  width: auto;
+  margin-left: 5%;
+  text-align: center; }
+
+.displayTopScore {
+  margin-top: 5%;
+  text-align: right;
+  margin-left: auto;
+  margin-right: 0; }
+
 .addAlarm {
   width: 100%;
   height: 30%;
-  margin-top: 70%;
   border-top: 1px solid white; }
 
 .addAlarmBtn {
   width: 50%;
+  height: 100%;
   background: transparent;
   margin: 0 auto;
-  margin-top: 20%;
+  margin-top: 2.5%;
   display: -webkit-box;
-  padding: 3em;
   -webkit-transition: padding 0.1s;
   transition: padding 0.1s; }
 
 .addAlarmBtn.disable-hover.button.button-default.activated {
   background-color: transparent;
-  padding: 2.9em; }
+  padding: 1.5em; }
 
 .tab-font {
   font-size: 10px; }
@@ -9225,13 +9262,12 @@ body {
 .show-tabbar a {
   color: white; }
 
-.tab-button-text {
+.button-inner {
   text-transform: capitalize; }
 
 .container {
-  background: url("../../img/bg-superman.jpg");
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   background-position: center;
   margin: auto;
   position: relative; }
@@ -9246,9 +9282,8 @@ body {
   background: white; }
 
 .container {
-  background: url("../../img/bg-superman.jpg");
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   background-position: center;
   margin: auto;
   position: relative; }
@@ -9261,11 +9296,84 @@ body {
 
 .toolbar ion-searchbar .searchbar-input {
   background: white; }
+
+.recordProgress {
+  width: 100%;
+  height: 69.1%;
+  display: inline-block;
+  position: relative;
+  border-bottom: 1px solid white; }
+
+.recordBorder {
+  width: 100%;
+  padding: 13%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  bottom: 5%; }
+
+.recordImg {
+  width: 75%;
+  display: block;
+  position: absolute;
+  top: 30%;
+  left: 44%;
+  font-size: 500%; }
+
+.recordBtns {
+  width: 100%;
+  height: 30%;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex; }
+
+.stopBtn {
+  width: 33.3%;
+  height: 100%;
+  padding: 0;
+  background: transparent;
+  -webkit-transition: padding 0.1s;
+  transition: padding 0.1s;
+  opacity: 0.4; }
+
+.startBtn {
+  width: 33.3%;
+  height: 100%;
+  padding: 0;
+  background: transparent;
+  -webkit-transition: padding 0.1s;
+  transition: padding 0.1s; }
+
+.recordingsBtn {
+  width: 33.3%;
+  height: 100%;
+  padding: 0;
+  background: transparent;
+  -webkit-transition: padding 0.1s;
+  transition: padding 0.1s; }
+
+.stopBtn.disable-hover.button.button-default.activated {
+  background-color: transparent; }
+
+.startBtn.disable-hover.button.button-default.activated {
+  background-color: transparent;
+  opacity: 0.4; }
+
+.recordingsBtn.disable-hover.button.button-default.activated {
+  background-color: transparent; }
+
+@media only screen and (max-device-width: 320px) and (max-device-height: 568px) {
+  .recordImg {
+    left: 42%; } }
 
 .container {
-  background: url("../../img/bg-superman.jpg");
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   background-position: center;
   margin: auto;
   position: relative; }
@@ -9278,3 +9386,29 @@ body {
 
 .toolbar ion-searchbar .searchbar-input {
   background: white; }
+
+.displayTopUser {
+  width: 100%;
+  height: 10%;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex; }
+
+.topUserImg {
+  width: 14%;
+  height: 100%;
+  margin-top: 0.8%;
+  margin-left: 4%; }
+
+.displayTopName {
+  margin-top: 5%;
+  width: auto;
+  margin-left: 5%;
+  text-align: center; }
+
+.displayTopScore {
+  margin-top: 5%;
+  text-align: right;
+  margin-left: auto;
+  margin-right: 4%; }

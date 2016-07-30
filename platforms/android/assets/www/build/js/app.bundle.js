@@ -12,7 +12,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var ionic_angular_1 = require('ionic-angular');
 var ionic_native_1 = require('ionic-native');
-var home_1 = require('./pages/home/home');
 var tabs_1 = require('./pages/tabs/tabs');
 var MyApp = (function () {
     function MyApp(platform, menu) {
@@ -22,11 +21,11 @@ var MyApp = (function () {
         this.initializeApp();
         // set our app's pages
         this.pages = [
-            { title: 'Home', component: home_1.HomePage },
-            { title: 'Store', component: home_1.HomePage },
-            { title: 'Setting', component: home_1.HomePage },
-            { title: 'About', component: home_1.HomePage },
-            { title: 'Contact Us', component: home_1.HomePage }
+            { title: 'Home', component: tabs_1.TabsPage },
+            { title: 'Store', component: tabs_1.TabsPage },
+            { title: 'Setting', component: tabs_1.TabsPage },
+            { title: 'About', component: tabs_1.TabsPage },
+            { title: 'Contact Us', component: tabs_1.TabsPage }
         ];
     }
     MyApp.prototype.initializeApp = function () {
@@ -59,7 +58,7 @@ ionic_angular_1.ionicBootstrap(MyApp, [], {
     tabbarPlacement: "bottom"
 });
 
-},{"./pages/home/home":2,"./pages/tabs/tabs":4,"@angular/core":153,"ionic-angular":417,"ionic-native":444}],2:[function(require,module,exports){
+},{"./pages/tabs/tabs":4,"@angular/core":153,"ionic-angular":417,"ionic-native":444}],2:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
