@@ -303,6 +303,8 @@ var TimerPage = (function () {
     function TimerPage(nav) {
         this.nav = nav;
     }
+    TimerPage.prototype.ngAfterViewInit = function () {
+    };
     TimerPage = __decorate([
         core_1.Component({
             templateUrl: 'build/pages/timer/timer.html',
