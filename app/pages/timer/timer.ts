@@ -1,5 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import * as $ from 'jquery';
+declare var stopwatch: any;
 
 /*
   Generated class for the TimerPage page.
@@ -13,6 +15,7 @@ import { NavController } from 'ionic-angular';
 export class TimerPage implements AfterViewInit {
   ngAfterViewInit() {
       
+
   }
   constructor(private nav: NavController) {
 
