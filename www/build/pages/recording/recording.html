@@ -12,10 +12,17 @@
 <ion-content padding class="container">
   <div class="recordProgress">
     <div class="recordBorder">
-      <img src="img/record-border.png"/>
+      <img src="img/record-border.png" id="borderImg"/>
     </div>
     <div class="recordImg">
       <ion-icon name="microphone"></ion-icon>
+    </div>
+    <div class="stopwatch" data-autostart="false">
+      <div class="time">
+          <span class="hours"></span> : 
+          <span class="minutes"></span> : 
+          <span class="seconds"></span>
+      </div>
     </div>
   </div>
   <div class="recordBtns">

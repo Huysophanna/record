@@ -41,10 +41,10 @@ export class HomePage {
 
       // Record audio
       this.mediaRec.startRecord('recorded-audio-'+ 1);
-    //   setTimeout(function() {
-    //     // Stop recording
-    //     this.mediaRec.stopRecord();
-    //   }, 5000);
+        //   setTimeout(function() {
+        //     // Stop recording
+        //     this.mediaRec.stopRecord();
+        //   }, 5000);
       
     }
 
