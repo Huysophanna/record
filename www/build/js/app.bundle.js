@@ -57,7 +57,6 @@ exports.MyApp = MyApp;
 ionic_angular_1.ionicBootstrap(MyApp, [], {
     tabbarPlacement: "bottom"
 });
-
 },{"./pages/tabs/tabs":4,"@angular/core":153,"ionic-angular":417,"ionic-native":444}],2:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -152,7 +151,6 @@ var HomePage = (function () {
     return HomePage;
 }());
 exports.HomePage = HomePage;
-
 },{"@angular/core":153,"ionic-angular":417}],3:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -242,7 +240,6 @@ var RecordingPage = (function () {
     return RecordingPage;
 }());
 exports.RecordingPage = RecordingPage;
-
 },{"@angular/core":153,"ionic-angular":417}],4:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -279,7 +276,6 @@ var TabsPage = (function () {
     return TabsPage;
 }());
 exports.TabsPage = TabsPage;
-
 },{"../home/home":2,"../recording/recording":3,"../timer/timer":5,"../topuser/topuser":6,"@angular/core":153,"ionic-angular":417}],5:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -312,7 +308,6 @@ var TimerPage = (function () {
     return TimerPage;
 }());
 exports.TimerPage = TimerPage;
-
 },{"@angular/core":153,"ionic-angular":417}],6:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -345,7 +340,6 @@ var TopuserPage = (function () {
     return TopuserPage;
 }());
 exports.TopuserPage = TopuserPage;
-
 },{"@angular/core":153,"ionic-angular":417}],7:[function(require,module,exports){
 "use strict";
 function __export(m) {
