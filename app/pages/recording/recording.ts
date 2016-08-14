@@ -27,12 +27,18 @@ export class RecordingPage implements AfterViewInit {
         }
 
         $('.startBtn').click(function() {
+            clearInterval(interval);
             interval = setInterval(function() {
                 rotateAnimation("borderImg", 150);
             }, 65);
+            $('.startBtn').css('opacity', '0.4');
+            $('.stopBtn').css('opacity', '1');
         });
+
         $('.stopBtn').click(function() {
             clearInterval(interval);
+            $('.startBtn').css('opacity', '1');
+            $('.stopBtn').css('opacity', '0.4');
         });
         
         /////////////////////////// stopwatch function ///////////////////////////
@@ -143,7 +149,7 @@ export class RecordingPage implements AfterViewInit {
             });
         });
 
-       
+
     }
     private _platform: Platform;
     private _fileRecord: MediaPlugin;

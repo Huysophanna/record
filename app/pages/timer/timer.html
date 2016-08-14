@@ -10,5 +10,11 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding class="container">
-  
+  <div class="timerSection">
+  </div>
+    <button (click)="timerSound();" class="displayTimerEnd">When Timer Ends <span class="timerSound">Radar&nbsp;&nbsp;<ion-icon name="arrow-forward"></ion-icon></span></button>
+  <div class="psBtn">
+    <button class="pauseTimerBtn"><img src="img/pauseBtn.png"/></button>
+    <button class="startTimerBtn"><img src="img/add-alarm.png"/></button>
+  </div>
 </ion-content>

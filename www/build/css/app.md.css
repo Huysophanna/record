@@ -9497,7 +9497,11 @@ body {
 
 .addAlarmBtn.disable-hover.button.button-default.activated {
   background-color: transparent;
-  padding: 1.5em; }
+  opacity: 0.7;
+  padding: 1.2em; }
+
+.button:hover:not(.disable-hover) {
+  background-color: transparent; }
 
 .tab-font {
   font-size: 10px; }
@@ -9526,6 +9530,75 @@ body {
 
 .toolbar ion-searchbar .searchbar-input {
   background: white; }
+
+.timerSection {
+  width: 100%;
+  height: 59%;
+  display: block;
+  border-bottom: 1px solid white; }
+
+.displayTimerEnd {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 10%; }
+
+.displayTimerEnd.button {
+  margin: 0;
+  padding: 3%;
+  border-radius: 0;
+  background-color: transparent;
+  -webkit-transition: 0.1s;
+  transition: 0.1s; }
+
+.displayTimerEnd.button.activated {
+  color: gray;
+  opacity: 0.5; }
+
+.timerSound {
+  margin-left: auto;
+  margin-bottom: 1.5%; }
+
+.timerSound ion-icon {
+  margin-top: 5%; }
+
+.psBtn {
+  width: 100%;
+  height: 30%;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  border-top: 1px solid white; }
+
+.pauseTimerBtn {
+  width: 33.3%;
+  height: 100%;
+  padding: 0;
+  margin-left: 12%;
+  margin-right: auto;
+  background: transparent;
+  -webkit-transition: 0.1s;
+  transition: 0.1s; }
+
+.pauseTimerBtn.disable-hover.button.button-default.activated {
+  background-color: transparent;
+  opacity: 0.4;
+  padding: 1%; }
+
+.startTimerBtn {
+  width: 33.3%;
+  height: 100%;
+  margin-right: 12%;
+  padding: 0;
+  background: transparent;
+  -webkit-transition: 0.1s;
+  transition: 0.1s; }
+
+.startTimerBtn.disable-hover.button.button-default.activated {
+  background-color: transparent;
+  opacity: 0.4;
+  padding: 1%; }
 
 .container {
   background-repeat: no-repeat;
@@ -9574,9 +9647,9 @@ body {
   display: block;
   width: 100%;
   position: absolute;
-  top: 85%;
+  top: 80%;
   text-align: center;
-  font-size: xx-large;
+  font-size: 350%;
   font-family: fantasy; }
 
 .recordBtns {
@@ -9609,24 +9682,33 @@ body {
   height: 100%;
   padding: 0;
   background: transparent;
-  -webkit-transition: padding 0.1s;
-  transition: padding 0.1s; }
+  -webkit-transition: 0.1s;
+  transition: 0.1s; }
 
 .stopBtn.disable-hover.button.button-default.activated {
-  background-color: transparent; }
+  background-color: transparent;
+  padding: 1%; }
 
 .startBtn.disable-hover.button.button-default.activated {
   background-color: transparent;
-  opacity: 0.4; }
+  opacity: 0.4;
+  padding: 1%; }
 
 .recordingsBtn.disable-hover.button.button-default.activated {
+  background-color: transparent;
+  padding: 1%; }
+
+.button.activated {
   background-color: transparent; }
 
 @media only screen and (max-device-width: 320px) and (max-device-height: 568px) {
   .recordImg {
-    left: 42%; } }
+    left: 42%; }
+  .stopwatch {
+    font-size: 300%; } }
 
 .container {
+  color: white;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -9641,6 +9723,17 @@ body {
 
 .toolbar ion-searchbar .searchbar-input {
   background: white; }
+
+.topUserLabel {
+  width: 100%;
+  height: 10%; }
+
+.topUserLabel p {
+  color: white;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  font-size: x-large; }
 
 .displayTopUser {
   width: 100%;
@@ -9667,3 +9760,6 @@ body {
   text-align: right;
   margin-left: auto;
   margin-right: 4%; }
+
+.tab-button-text {
+  font-size: smaller; }

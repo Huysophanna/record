@@ -54,9 +54,9 @@
     display: block;
     width: 100%;
     position: absolute;
-    top: 85%;
+    top: 80%;
     text-align: center;
-    font-size: xx-large;
+    font-size: 350%;
     font-family: fantasy;
 
 }
@@ -84,22 +84,31 @@
     -webkit-transition: padding 0.1s;
     transition: padding 0.1s;
 }
+
 .recordingsBtn {
     width: 33.3%;
     height: 100%;
     padding: 0;
     background: transparent;
-    -webkit-transition: padding 0.1s;
-    transition: padding 0.1s;
+    -webkit-transition: 0.1s;
+    transition: 0.1s;
 }
+
 .stopBtn.disable-hover.button.button-default.activated {
     background-color: transparent;
+    padding: 1%;
 }
 .startBtn.disable-hover.button.button-default.activated {
     background-color: transparent;
     opacity: 0.4;
+    padding: 1%;
 }
 .recordingsBtn.disable-hover.button.button-default.activated {
+    background-color: transparent;
+    padding: 1%;
+
+}
+.button.activated {
     background-color: transparent;
 }
 
@@ -107,5 +116,8 @@
 @media only screen and (max-device-width : 320px) and (max-device-height : 568px) {
     .recordImg {
         left: 42%;
+    }
+    .stopwatch {
+        font-size: 300%;
     }
 }
