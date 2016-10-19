@@ -367,7 +367,7 @@ var RecordingPage = (function () {
 }());
 exports.RecordingPage = RecordingPage;
 
-},{"@angular/core":153,"ionic-angular":417,"jquery":532}],4:[function(require,module,exports){
+},{"@angular/core":153,"ionic-angular":417,"jquery":531}],4:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -85477,8 +85477,8 @@ exports.get = get;
 },{}],511:[function(require,module,exports){
 "use strict";
 var root_1 = require('./util/root');
-var observable_1 = require('./symbol/observable');
 var toSubscriber_1 = require('./util/toSubscriber');
+var observable_1 = require('./symbol/observable');
 /**
  * A representation of any set of values over any amount of time. This the most basic building block
  * of RxJS.
@@ -85512,21 +85512,15 @@ var Observable = (function () {
         observable.operator = operator;
         return observable;
     };
-    /**
-     * Registers handlers for handling emitted values, error and completions from the observable, and
-     *  executes the observable's subscriber function, which will take action to set up the underlying data stream
-     * @method subscribe
-     * @param {PartialObserver|Function} observerOrNext (optional) either an observer defining all functions to be called,
-     *  or the first of three possible handlers, which is the handler for each value emitted from the observable.
-     * @param {Function} error (optional) a handler for a terminal event resulting from an error. If no error handler is provided,
-     *  the error will be thrown as unhandled
-     * @param {Function} complete (optional) a handler for a terminal event resulting from successful completion.
-     * @return {ISubscription} a subscription reference to the registered handlers
-     */
     Observable.prototype.subscribe = function (observerOrNext, error, complete) {
         var operator = this.operator;
         var sink = toSubscriber_1.toSubscriber(observerOrNext, error, complete);
-        sink.add(operator ? operator.call(sink, this) : this._subscribe(sink));
+        if (operator) {
+            operator.call(sink, this);
+        }
+        else {
+            sink.add(this._subscribe(sink));
+        }
         if (sink.syncErrorThrowable) {
             sink.syncErrorThrowable = false;
             if (sink.syncErrorThrown) {
@@ -85573,7 +85567,7 @@ var Observable = (function () {
                 else {
                     // if there is NO subscription, then we're getting a nexted
                     // value synchronously during subscription. We can just call it.
-                    // If it errors, Observable's `subscribe` imple will ensure the
+                    // If it errors, Observable's `subscribe` will ensure the
                     // unsubscription logic is called, then synchronously rethrow the error.
                     // After that, Promise will trap the error and send it
                     // down the rejection path.
@@ -85610,10 +85604,10 @@ var Observable = (function () {
 }());
 exports.Observable = Observable;
 
-},{"./symbol/observable":519,"./util/root":527,"./util/toSubscriber":529}],512:[function(require,module,exports){
+},{"./symbol/observable":519,"./util/root":527,"./util/toSubscriber":528}],512:[function(require,module,exports){
 "use strict";
 exports.empty = {
-    isUnsubscribed: true,
+    closed: true,
     next: function (value) { },
     error: function (err) { throw err; },
     complete: function () { }
@@ -85629,204 +85623,158 @@ var __extends = (this && this.__extends) || function (d, b) {
 var Observable_1 = require('./Observable');
 var Subscriber_1 = require('./Subscriber');
 var Subscription_1 = require('./Subscription');
+var ObjectUnsubscribedError_1 = require('./util/ObjectUnsubscribedError');
 var SubjectSubscription_1 = require('./SubjectSubscription');
 var rxSubscriber_1 = require('./symbol/rxSubscriber');
-var throwError_1 = require('./util/throwError');
-var ObjectUnsubscribedError_1 = require('./util/ObjectUnsubscribedError');
+/**
+ * @class SubjectSubscriber<T>
+ */
+var SubjectSubscriber = (function (_super) {
+    __extends(SubjectSubscriber, _super);
+    function SubjectSubscriber(destination) {
+        _super.call(this, destination);
+        this.destination = destination;
+    }
+    return SubjectSubscriber;
+}(Subscriber_1.Subscriber));
+exports.SubjectSubscriber = SubjectSubscriber;
 /**
  * @class Subject<T>
  */
 var Subject = (function (_super) {
     __extends(Subject, _super);
-    function Subject(destination, source) {
+    function Subject() {
         _super.call(this);
-        this.destination = destination;
-        this.source = source;
         this.observers = [];
-        this.isUnsubscribed = false;
+        this.closed = false;
         this.isStopped = false;
-        this.hasErrored = false;
-        this.dispatching = false;
-        this.hasCompleted = false;
-        this.source = source;
+        this.hasError = false;
+        this.thrownError = null;
     }
+    Subject.prototype[rxSubscriber_1.$$rxSubscriber] = function () {
+        return new SubjectSubscriber(this);
+    };
     Subject.prototype.lift = function (operator) {
-        var subject = new Subject(this.destination || this, this);
+        var subject = new AnonymousSubject(this, this);
         subject.operator = operator;
         return subject;
     };
-    Subject.prototype.add = function (subscription) {
-        return Subscription_1.Subscription.prototype.add.call(this, subscription);
-    };
-    Subject.prototype.remove = function (subscription) {
-        Subscription_1.Subscription.prototype.remove.call(this, subscription);
-    };
-    Subject.prototype.unsubscribe = function () {
-        Subscription_1.Subscription.prototype.unsubscribe.call(this);
-    };
-    Subject.prototype._subscribe = function (subscriber) {
-        if (this.source) {
-            return this.source.subscribe(subscriber);
-        }
-        else {
-            if (subscriber.isUnsubscribed) {
-                return;
-            }
-            else if (this.hasErrored) {
-                return subscriber.error(this.errorValue);
-            }
-            else if (this.hasCompleted) {
-                return subscriber.complete();
-            }
-            this.throwIfUnsubscribed();
-            var subscription = new SubjectSubscription_1.SubjectSubscription(this, subscriber);
-            this.observers.push(subscriber);
-            return subscription;
-        }
-    };
-    Subject.prototype._unsubscribe = function () {
-        this.source = null;
-        this.isStopped = true;
-        this.observers = null;
-        this.destination = null;
-    };
     Subject.prototype.next = function (value) {
-        this.throwIfUnsubscribed();
-        if (this.isStopped) {
-            return;
+        if (this.closed) {
+            throw new ObjectUnsubscribedError_1.ObjectUnsubscribedError();
         }
-        this.dispatching = true;
-        this._next(value);
-        this.dispatching = false;
-        if (this.hasErrored) {
-            this._error(this.errorValue);
-        }
-        else if (this.hasCompleted) {
-            this._complete();
+        if (!this.isStopped) {
+            var observers = this.observers;
+            var len = observers.length;
+            var copy = observers.slice();
+            for (var i = 0; i < len; i++) {
+                copy[i].next(value);
+            }
         }
     };
     Subject.prototype.error = function (err) {
-        this.throwIfUnsubscribed();
-        if (this.isStopped) {
-            return;
+        if (this.closed) {
+            throw new ObjectUnsubscribedError_1.ObjectUnsubscribedError();
         }
+        this.hasError = true;
+        this.thrownError = err;
         this.isStopped = true;
-        this.hasErrored = true;
-        this.errorValue = err;
-        if (this.dispatching) {
-            return;
+        var observers = this.observers;
+        var len = observers.length;
+        var copy = observers.slice();
+        for (var i = 0; i < len; i++) {
+            copy[i].error(err);
         }
-        this._error(err);
+        this.observers.length = 0;
     };
     Subject.prototype.complete = function () {
-        this.throwIfUnsubscribed();
-        if (this.isStopped) {
-            return;
+        if (this.closed) {
+            throw new ObjectUnsubscribedError_1.ObjectUnsubscribedError();
         }
         this.isStopped = true;
-        this.hasCompleted = true;
-        if (this.dispatching) {
-            return;
+        var observers = this.observers;
+        var len = observers.length;
+        var copy = observers.slice();
+        for (var i = 0; i < len; i++) {
+            copy[i].complete();
         }
-        this._complete();
+        this.observers.length = 0;
+    };
+    Subject.prototype.unsubscribe = function () {
+        this.isStopped = true;
+        this.closed = true;
+        this.observers = null;
+    };
+    Subject.prototype._subscribe = function (subscriber) {
+        if (this.closed) {
+            throw new ObjectUnsubscribedError_1.ObjectUnsubscribedError();
+        }
+        else if (this.hasError) {
+            subscriber.error(this.thrownError);
+            return Subscription_1.Subscription.EMPTY;
+        }
+        else if (this.isStopped) {
+            subscriber.complete();
+            return Subscription_1.Subscription.EMPTY;
+        }
+        else {
+            this.observers.push(subscriber);
+            return new SubjectSubscription_1.SubjectSubscription(this, subscriber);
+        }
     };
     Subject.prototype.asObservable = function () {
-        var observable = new SubjectObservable(this);
+        var observable = new Observable_1.Observable();
+        observable.source = this;
         return observable;
     };
-    Subject.prototype._next = function (value) {
-        if (this.destination) {
-            this.destination.next(value);
-        }
-        else {
-            this._finalNext(value);
-        }
-    };
-    Subject.prototype._finalNext = function (value) {
-        var index = -1;
-        var observers = this.observers.slice(0);
-        var len = observers.length;
-        while (++index < len) {
-            observers[index].next(value);
-        }
-    };
-    Subject.prototype._error = function (err) {
-        if (this.destination) {
-            this.destination.error(err);
-        }
-        else {
-            this._finalError(err);
-        }
-    };
-    Subject.prototype._finalError = function (err) {
-        var index = -1;
-        var observers = this.observers;
-        // optimization to block our SubjectSubscriptions from
-        // splicing themselves out of the observers list one by one.
-        this.observers = null;
-        this.isUnsubscribed = true;
-        if (observers) {
-            var len = observers.length;
-            while (++index < len) {
-                observers[index].error(err);
-            }
-        }
-        this.isUnsubscribed = false;
-        this.unsubscribe();
-    };
-    Subject.prototype._complete = function () {
-        if (this.destination) {
-            this.destination.complete();
-        }
-        else {
-            this._finalComplete();
-        }
-    };
-    Subject.prototype._finalComplete = function () {
-        var index = -1;
-        var observers = this.observers;
-        // optimization to block our SubjectSubscriptions from
-        // splicing themselves out of the observers list one by one.
-        this.observers = null;
-        this.isUnsubscribed = true;
-        if (observers) {
-            var len = observers.length;
-            while (++index < len) {
-                observers[index].complete();
-            }
-        }
-        this.isUnsubscribed = false;
-        this.unsubscribe();
-    };
-    Subject.prototype.throwIfUnsubscribed = function () {
-        if (this.isUnsubscribed) {
-            throwError_1.throwError(new ObjectUnsubscribedError_1.ObjectUnsubscribedError());
-        }
-    };
-    Subject.prototype[rxSubscriber_1.$$rxSubscriber] = function () {
-        return new Subscriber_1.Subscriber(this);
-    };
     Subject.create = function (destination, source) {
-        return new Subject(destination, source);
+        return new AnonymousSubject(destination, source);
     };
     return Subject;
 }(Observable_1.Observable));
 exports.Subject = Subject;
 /**
- * We need this JSDoc comment for affecting ESDoc.
- * @ignore
- * @extends {Ignored}
+ * @class AnonymousSubject<T>
  */
-var SubjectObservable = (function (_super) {
-    __extends(SubjectObservable, _super);
-    function SubjectObservable(source) {
+var AnonymousSubject = (function (_super) {
+    __extends(AnonymousSubject, _super);
+    function AnonymousSubject(destination, source) {
         _super.call(this);
+        this.destination = destination;
         this.source = source;
     }
-    return SubjectObservable;
-}(Observable_1.Observable));
+    AnonymousSubject.prototype.next = function (value) {
+        var destination = this.destination;
+        if (destination && destination.next) {
+            destination.next(value);
+        }
+    };
+    AnonymousSubject.prototype.error = function (err) {
+        var destination = this.destination;
+        if (destination && destination.error) {
+            this.destination.error(err);
+        }
+    };
+    AnonymousSubject.prototype.complete = function () {
+        var destination = this.destination;
+        if (destination && destination.complete) {
+            this.destination.complete();
+        }
+    };
+    AnonymousSubject.prototype._subscribe = function (subscriber) {
+        var source = this.source;
+        if (source) {
+            return this.source.subscribe(subscriber);
+        }
+        else {
+            return Subscription_1.Subscription.EMPTY;
+        }
+    };
+    return AnonymousSubject;
+}(Subject));
+exports.AnonymousSubject = AnonymousSubject;
 
-},{"./Observable":511,"./SubjectSubscription":514,"./Subscriber":515,"./Subscription":516,"./symbol/rxSubscriber":520,"./util/ObjectUnsubscribedError":521,"./util/throwError":528}],514:[function(require,module,exports){
+},{"./Observable":511,"./SubjectSubscription":514,"./Subscriber":515,"./Subscription":516,"./symbol/rxSubscriber":520,"./util/ObjectUnsubscribedError":521}],514:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -85841,24 +85789,24 @@ var Subscription_1 = require('./Subscription');
  */
 var SubjectSubscription = (function (_super) {
     __extends(SubjectSubscription, _super);
-    function SubjectSubscription(subject, observer) {
+    function SubjectSubscription(subject, subscriber) {
         _super.call(this);
         this.subject = subject;
-        this.observer = observer;
-        this.isUnsubscribed = false;
+        this.subscriber = subscriber;
+        this.closed = false;
     }
     SubjectSubscription.prototype.unsubscribe = function () {
-        if (this.isUnsubscribed) {
+        if (this.closed) {
             return;
         }
-        this.isUnsubscribed = true;
+        this.closed = true;
         var subject = this.subject;
         var observers = subject.observers;
         this.subject = null;
-        if (!observers || observers.length === 0 || subject.isUnsubscribed) {
+        if (!observers || observers.length === 0 || subject.isStopped || subject.closed) {
             return;
         }
-        var subscriberIndex = observers.indexOf(this.observer);
+        var subscriberIndex = observers.indexOf(this.subscriber);
         if (subscriberIndex !== -1) {
             observers.splice(subscriberIndex, 1);
         }
@@ -85876,8 +85824,8 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var isFunction_1 = require('./util/isFunction');
 var Subscription_1 = require('./Subscription');
-var rxSubscriber_1 = require('./symbol/rxSubscriber');
 var Observer_1 = require('./Observer');
+var rxSubscriber_1 = require('./symbol/rxSubscriber');
 /**
  * Implements the {@link Observer} interface and extends the
  * {@link Subscription} class. While the {@link Observer} is the public API for
@@ -85930,6 +85878,7 @@ var Subscriber = (function (_super) {
                 break;
         }
     }
+    Subscriber.prototype[rxSubscriber_1.$$rxSubscriber] = function () { return this; };
     /**
      * A static factory for a Subscriber, given a (potentially partial) definition
      * of an Observer.
@@ -85984,7 +85933,7 @@ var Subscriber = (function (_super) {
         }
     };
     Subscriber.prototype.unsubscribe = function () {
-        if (this.isUnsubscribed) {
+        if (this.closed) {
             return;
         }
         this.isStopped = true;
@@ -86000,9 +85949,6 @@ var Subscriber = (function (_super) {
     Subscriber.prototype._complete = function () {
         this.destination.complete();
         this.unsubscribe();
-    };
-    Subscriber.prototype[rxSubscriber_1.$$rxSubscriber] = function () {
-        return this;
     };
     return Subscriber;
 }(Subscription_1.Subscription));
@@ -86149,7 +86095,7 @@ var Subscription = (function () {
          * A flag to indicate whether this Subscription has already been unsubscribed.
          * @type {boolean}
          */
-        this.isUnsubscribed = false;
+        this.closed = false;
         if (unsubscribe) {
             this._unsubscribe = unsubscribe;
         }
@@ -86163,10 +86109,10 @@ var Subscription = (function () {
     Subscription.prototype.unsubscribe = function () {
         var hasErrors = false;
         var errors;
-        if (this.isUnsubscribed) {
+        if (this.closed) {
             return;
         }
-        this.isUnsubscribed = true;
+        this.closed = true;
         var _a = this, _unsubscribe = _a._unsubscribe, _subscriptions = _a._subscriptions;
         this._subscriptions = null;
         if (isFunction_1.isFunction(_unsubscribe)) {
@@ -86209,7 +86155,7 @@ var Subscription = (function () {
      * unsubscribed, is the same reference `add` is being called on, or is
      * `Subscription.EMPTY`, it will not be added.
      *
-     * If this subscription is already in an `isUnsubscribed` state, the passed
+     * If this subscription is already in an `closed` state, the passed
      * tear down logic will be executed immediately.
      *
      * @param {TeardownLogic} teardown The additional logic to execute on
@@ -86220,18 +86166,21 @@ var Subscription = (function () {
      * list.
      */
     Subscription.prototype.add = function (teardown) {
-        if (!teardown || (teardown === this) || (teardown === Subscription.EMPTY)) {
-            return;
+        if (!teardown || (teardown === Subscription.EMPTY)) {
+            return Subscription.EMPTY;
+        }
+        if (teardown === this) {
+            return this;
         }
         var sub = teardown;
         switch (typeof teardown) {
             case 'function':
                 sub = new Subscription(teardown);
             case 'object':
-                if (sub.isUnsubscribed || typeof sub.unsubscribe !== 'function') {
+                if (sub.closed || typeof sub.unsubscribe !== 'function') {
                     break;
                 }
-                else if (this.isUnsubscribed) {
+                else if (this.closed) {
                     sub.unsubscribe();
                 }
                 else {
@@ -86239,7 +86188,7 @@ var Subscription = (function () {
                 }
                 break;
             default:
-                throw new Error('Unrecognized teardown ' + teardown + ' added to Subscription.');
+                throw new Error('unrecognized teardown ' + teardown + ' added to Subscription.');
         }
         return sub;
     };
@@ -86263,14 +86212,14 @@ var Subscription = (function () {
         }
     };
     Subscription.EMPTY = (function (empty) {
-        empty.isUnsubscribed = true;
+        empty.closed = true;
         return empty;
     }(new Subscription()));
     return Subscription;
 }());
 exports.Subscription = Subscription;
 
-},{"./util/UnsubscriptionError":522,"./util/errorObject":523,"./util/isArray":524,"./util/isFunction":525,"./util/isObject":526,"./util/tryCatch":530}],517:[function(require,module,exports){
+},{"./util/UnsubscriptionError":522,"./util/errorObject":523,"./util/isArray":524,"./util/isFunction":525,"./util/isObject":526,"./util/tryCatch":529}],517:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -86287,21 +86236,37 @@ var Observable_1 = require('../Observable');
 var PromiseObservable = (function (_super) {
     __extends(PromiseObservable, _super);
     function PromiseObservable(promise, scheduler) {
-        if (scheduler === void 0) { scheduler = null; }
         _super.call(this);
         this.promise = promise;
         this.scheduler = scheduler;
     }
     /**
-     * @param promise
-     * @param scheduler
-     * @return {PromiseObservable}
+     * Converts a Promise to an Observable.
+     *
+     * <span class="informal">Returns an Observable that just emits the Promise's
+     * resolved value, then completes.</span>
+     *
+     * Converts an ES2015 Promise or a Promises/A+ spec compliant Promise to an
+     * Observable. If the Promise resolves with a value, the output Observable
+     * emits that resolved value as a `next`, and then completes. If the Promise
+     * is rejected, then the output Observable emits the corresponding Error.
+     *
+     * @example <caption>Convert the Promise returned by Fetch to an Observable</caption>
+     * var result = Rx.Observable.fromPromise(fetch('http://myserver.com/'));
+     * result.subscribe(x => console.log(x), e => console.error(e));
+     *
+     * @see {@link bindCallback}
+     * @see {@link from}
+     *
+     * @param {Promise<T>} promise The promise to be converted.
+     * @param {Scheduler} [scheduler] An optional Scheduler to use for scheduling
+     * the delivery of the resolved value (or the rejection).
+     * @return {Observable<T>} An Observable which wraps the Promise.
      * @static true
      * @name fromPromise
      * @owner Observable
      */
     PromiseObservable.create = function (promise, scheduler) {
-        if (scheduler === void 0) { scheduler = null; }
         return new PromiseObservable(promise, scheduler);
     };
     PromiseObservable.prototype._subscribe = function (subscriber) {
@@ -86310,7 +86275,7 @@ var PromiseObservable = (function (_super) {
         var scheduler = this.scheduler;
         if (scheduler == null) {
             if (this._isScalar) {
-                if (!subscriber.isUnsubscribed) {
+                if (!subscriber.closed) {
                     subscriber.next(this.value);
                     subscriber.complete();
                 }
@@ -86319,12 +86284,12 @@ var PromiseObservable = (function (_super) {
                 promise.then(function (value) {
                     _this.value = value;
                     _this._isScalar = true;
-                    if (!subscriber.isUnsubscribed) {
+                    if (!subscriber.closed) {
                         subscriber.next(value);
                         subscriber.complete();
                     }
                 }, function (err) {
-                    if (!subscriber.isUnsubscribed) {
+                    if (!subscriber.closed) {
                         subscriber.error(err);
                     }
                 })
@@ -86336,7 +86301,7 @@ var PromiseObservable = (function (_super) {
         }
         else {
             if (this._isScalar) {
-                if (!subscriber.isUnsubscribed) {
+                if (!subscriber.closed) {
                     return scheduler.schedule(dispatchNext, 0, { value: this.value, subscriber: subscriber });
                 }
             }
@@ -86344,11 +86309,11 @@ var PromiseObservable = (function (_super) {
                 promise.then(function (value) {
                     _this.value = value;
                     _this._isScalar = true;
-                    if (!subscriber.isUnsubscribed) {
+                    if (!subscriber.closed) {
                         subscriber.add(scheduler.schedule(dispatchNext, 0, { value: value, subscriber: subscriber }));
                     }
                 }, function (err) {
-                    if (!subscriber.isUnsubscribed) {
+                    if (!subscriber.closed) {
                         subscriber.add(scheduler.schedule(dispatchError, 0, { err: err, subscriber: subscriber }));
                     }
                 })
@@ -86364,14 +86329,14 @@ var PromiseObservable = (function (_super) {
 exports.PromiseObservable = PromiseObservable;
 function dispatchNext(arg) {
     var value = arg.value, subscriber = arg.subscriber;
-    if (!subscriber.isUnsubscribed) {
+    if (!subscriber.closed) {
         subscriber.next(value);
         subscriber.complete();
     }
 }
 function dispatchError(arg) {
     var err = arg.err, subscriber = arg.subscriber;
-    if (!subscriber.isUnsubscribed) {
+    if (!subscriber.closed) {
         subscriber.error(err);
     }
 }
@@ -86379,12 +86344,7 @@ function dispatchError(arg) {
 },{"../Observable":511,"../util/root":527}],518:[function(require,module,exports){
 "use strict";
 var root_1 = require('../util/root');
-/**
- * @param PromiseCtor
- * @return {Promise<T>}
- * @method toPromise
- * @owner Observable
- */
+/* tslint:disable:max-line-length */
 function toPromise(PromiseCtor) {
     var _this = this;
     if (!PromiseCtor) {
@@ -86408,24 +86368,25 @@ exports.toPromise = toPromise;
 },{"../util/root":527}],519:[function(require,module,exports){
 "use strict";
 var root_1 = require('../util/root');
-var Symbol = root_1.root.Symbol;
-if (typeof Symbol === 'function') {
-    if (Symbol.observable) {
-        exports.$$observable = Symbol.observable;
-    }
-    else {
-        if (typeof Symbol.for === 'function') {
-            exports.$$observable = Symbol.for('observable');
+function getSymbolObservable(context) {
+    var $$observable;
+    var Symbol = context.Symbol;
+    if (typeof Symbol === 'function') {
+        if (Symbol.observable) {
+            $$observable = Symbol.observable;
         }
         else {
-            exports.$$observable = Symbol('observable');
+            $$observable = Symbol('observable');
+            Symbol.observable = $$observable;
         }
-        Symbol.observable = exports.$$observable;
     }
+    else {
+        $$observable = '@@observable';
+    }
+    return $$observable;
 }
-else {
-    exports.$$observable = '@@observable';
-}
+exports.getSymbolObservable = getSymbolObservable;
+exports.$$observable = getSymbolObservable(root_1.root);
 
 },{"../util/root":527}],520:[function(require,module,exports){
 "use strict";
@@ -86453,8 +86414,10 @@ var __extends = (this && this.__extends) || function (d, b) {
 var ObjectUnsubscribedError = (function (_super) {
     __extends(ObjectUnsubscribedError, _super);
     function ObjectUnsubscribedError() {
-        _super.call(this, 'object unsubscribed');
-        this.name = 'ObjectUnsubscribedError';
+        var err = _super.call(this, 'object unsubscribed');
+        this.name = err.name = 'ObjectUnsubscribedError';
+        this.stack = err.stack;
+        this.message = err.message;
     }
     return ObjectUnsubscribedError;
 }(Error));
@@ -86476,8 +86439,11 @@ var UnsubscriptionError = (function (_super) {
     function UnsubscriptionError(errors) {
         _super.call(this);
         this.errors = errors;
-        this.name = 'UnsubscriptionError';
-        this.message = errors ? errors.length + " errors occurred during unsubscription:\n" + errors.map(function (err, i) { return ((i + 1) + ") " + err.toString()); }).join('\n') : '';
+        var err = Error.call(this, errors ?
+            errors.length + " errors occurred during unsubscription:\n  " + errors.map(function (err, i) { return ((i + 1) + ") " + err.toString()); }).join('\n  ') : '');
+        this.name = err.name = 'UnsubscriptionError';
+        this.stack = err.stack;
+        this.message = err.message;
     }
     return UnsubscriptionError;
 }(Error));
@@ -86509,48 +86475,42 @@ exports.isObject = isObject;
 },{}],527:[function(require,module,exports){
 (function (global){
 "use strict";
-var objectTypes = {
-    'boolean': false,
-    'function': true,
-    'object': true,
-    'number': false,
-    'string': false,
-    'undefined': false
-};
-exports.root = (objectTypes[typeof self] && self) || (objectTypes[typeof window] && window);
-/* tslint:disable:no-unused-variable */
-var freeExports = objectTypes[typeof exports] && exports && !exports.nodeType && exports;
-var freeModule = objectTypes[typeof module] && module && !module.nodeType && module;
-var freeGlobal = objectTypes[typeof global] && global;
-if (freeGlobal && (freeGlobal.global === freeGlobal || freeGlobal.window === freeGlobal)) {
-    exports.root = freeGlobal;
+/**
+ * window: browser in DOM main thread
+ * self: browser in WebWorker
+ * global: Node.js/other
+ */
+exports.root = (typeof window == 'object' && window.window === window && window
+    || typeof self == 'object' && self.self === self && self
+    || typeof global == 'object' && global.global === global && global);
+if (!exports.root) {
+    throw new Error('RxJS could not find any global context (window, self, global)');
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
 },{}],528:[function(require,module,exports){
 "use strict";
-function throwError(e) { throw e; }
-exports.throwError = throwError;
-
-},{}],529:[function(require,module,exports){
-"use strict";
 var Subscriber_1 = require('../Subscriber');
 var rxSubscriber_1 = require('../symbol/rxSubscriber');
+var Observer_1 = require('../Observer');
 function toSubscriber(nextOrObserver, error, complete) {
-    if (nextOrObserver && typeof nextOrObserver === 'object') {
+    if (nextOrObserver) {
         if (nextOrObserver instanceof Subscriber_1.Subscriber) {
             return nextOrObserver;
         }
-        else if (typeof nextOrObserver[rxSubscriber_1.$$rxSubscriber] === 'function') {
+        if (nextOrObserver[rxSubscriber_1.$$rxSubscriber]) {
             return nextOrObserver[rxSubscriber_1.$$rxSubscriber]();
         }
+    }
+    if (!nextOrObserver && !error && !complete) {
+        return new Subscriber_1.Subscriber(Observer_1.empty);
     }
     return new Subscriber_1.Subscriber(nextOrObserver, error, complete);
 }
 exports.toSubscriber = toSubscriber;
 
-},{"../Subscriber":515,"../symbol/rxSubscriber":520}],530:[function(require,module,exports){
+},{"../Observer":512,"../Subscriber":515,"../symbol/rxSubscriber":520}],529:[function(require,module,exports){
 "use strict";
 var errorObject_1 = require('./errorObject');
 var tryCatchTarget;
@@ -86570,12 +86530,11 @@ function tryCatch(fn) {
 exports.tryCatch = tryCatch;
 ;
 
-},{"./errorObject":523}],531:[function(require,module,exports){
+},{"./errorObject":523}],530:[function(require,module,exports){
 
-},{}],532:[function(require,module,exports){
-/*eslint-disable no-unused-vars*/
+},{}],531:[function(require,module,exports){
 /*!
- * jQuery JavaScript Library v3.1.0
+ * jQuery JavaScript Library v3.1.1
  * https://jquery.com/
  *
  * Includes Sizzle.js
@@ -86585,7 +86544,7 @@ exports.tryCatch = tryCatch;
  * Released under the MIT license
  * https://jquery.org/license
  *
- * Date: 2016-07-07T21:44Z
+ * Date: 2016-09-22T22:30Z
  */
 ( function( global, factory ) {
 
@@ -86658,13 +86617,13 @@ var support = {};
 		doc.head.appendChild( script ).parentNode.removeChild( script );
 	}
 /* global Symbol */
-// Defining this global in .eslintrc would create a danger of using the global
+// Defining this global in .eslintrc.json would create a danger of using the global
 // unguarded in another place, it seems safer to define global only for this module
 
 
 
 var
-	version = "3.1.0",
+	version = "3.1.1",
 
 	// Define a local copy of jQuery
 	jQuery = function( selector, context ) {
@@ -86704,13 +86663,14 @@ jQuery.fn = jQuery.prototype = {
 	// Get the Nth element in the matched element set OR
 	// Get the whole matched element set as a clean array
 	get: function( num ) {
-		return num != null ?
 
-			// Return just the one element from the set
-			( num < 0 ? this[ num + this.length ] : this[ num ] ) :
+		// Return all the elements in a clean array
+		if ( num == null ) {
+			return slice.call( this );
+		}
 
-			// Return all the elements in a clean array
-			slice.call( this );
+		// Return just the one element from the set
+		return num < 0 ? this[ num + this.length ] : this[ num ];
 	},
 
 	// Take an array of elements and push it onto the stack
@@ -87118,14 +87078,14 @@ function isArrayLike( obj ) {
 }
 var Sizzle =
 /*!
- * Sizzle CSS Selector Engine v2.3.0
+ * Sizzle CSS Selector Engine v2.3.3
  * https://sizzlejs.com/
  *
  * Copyright jQuery Foundation and other contributors
  * Released under the MIT license
  * http://jquery.org/license
  *
- * Date: 2016-01-04
+ * Date: 2016-08-08
  */
 (function( window ) {
 
@@ -87271,7 +87231,7 @@ var i,
 
 	// CSS string/identifier serialization
 	// https://drafts.csswg.org/cssom/#common-serializing-idioms
-	rcssescape = /([\0-\x1f\x7f]|^-?\d)|^-$|[^\x80-\uFFFF\w-]/g,
+	rcssescape = /([\0-\x1f\x7f]|^-?\d)|^-$|[^\0-\x1f\x7f-\uFFFF\w-]/g,
 	fcssescape = function( ch, asCodePoint ) {
 		if ( asCodePoint ) {
 
@@ -87298,7 +87258,7 @@ var i,
 
 	disabledAncestor = addCombinator(
 		function( elem ) {
-			return elem.disabled === true;
+			return elem.disabled === true && ("form" in elem || "label" in elem);
 		},
 		{ dir: "parentNode", next: "legend" }
 	);
@@ -87584,26 +87544,54 @@ function createButtonPseudo( type ) {
  * @param {Boolean} disabled true for :disabled; false for :enabled
  */
 function createDisabledPseudo( disabled ) {
-	// Known :disabled false positives:
-	// IE: *[disabled]:not(button, input, select, textarea, optgroup, option, menuitem, fieldset)
-	// not IE: fieldset[disabled] > legend:nth-of-type(n+2) :can-disable
+
+	// Known :disabled false positives: fieldset[disabled] > legend:nth-of-type(n+2) :can-disable
 	return function( elem ) {
 
-		// Check form elements and option elements for explicit disabling
-		return "label" in elem && elem.disabled === disabled ||
-			"form" in elem && elem.disabled === disabled ||
+		// Only certain elements can match :enabled or :disabled
+		// https://html.spec.whatwg.org/multipage/scripting.html#selector-enabled
+		// https://html.spec.whatwg.org/multipage/scripting.html#selector-disabled
+		if ( "form" in elem ) {
 
-			// Check non-disabled form elements for fieldset[disabled] ancestors
-			"form" in elem && elem.disabled === false && (
-				// Support: IE6-11+
-				// Ancestry is covered for us
-				elem.isDisabled === disabled ||
+			// Check for inherited disabledness on relevant non-disabled elements:
+			// * listed form-associated elements in a disabled fieldset
+			//   https://html.spec.whatwg.org/multipage/forms.html#category-listed
+			//   https://html.spec.whatwg.org/multipage/forms.html#concept-fe-disabled
+			// * option elements in a disabled optgroup
+			//   https://html.spec.whatwg.org/multipage/forms.html#concept-option-disabled
+			// All such elements have a "form" property.
+			if ( elem.parentNode && elem.disabled === false ) {
 
-				// Otherwise, assume any non-<option> under fieldset[disabled] is disabled
-				/* jshint -W018 */
-				elem.isDisabled !== !disabled &&
-					("label" in elem || !disabledAncestor( elem )) !== disabled
-			);
+				// Option elements defer to a parent optgroup if present
+				if ( "label" in elem ) {
+					if ( "label" in elem.parentNode ) {
+						return elem.parentNode.disabled === disabled;
+					} else {
+						return elem.disabled === disabled;
+					}
+				}
+
+				// Support: IE 6 - 11
+				// Use the isDisabled shortcut property to check for disabled fieldset ancestors
+				return elem.isDisabled === disabled ||
+
+					// Where there is no isDisabled, check manually
+					/* jshint -W018 */
+					elem.isDisabled !== !disabled &&
+						disabledAncestor( elem ) === disabled;
+			}
+
+			return elem.disabled === disabled;
+
+		// Try to winnow out elements that can't be disabled before trusting the disabled property.
+		// Some victims get caught in our net (label, legend, menu, track), but it shouldn't
+		// even exist on them, let alone have a boolean value.
+		} else if ( "label" in elem ) {
+			return elem.disabled === disabled;
+		}
+
+		// Remaining elements are neither :enabled nor :disabled
+		return false;
 	};
 }
 
@@ -87719,25 +87707,21 @@ setDocument = Sizzle.setDocument = function( node ) {
 		return !document.getElementsByName || !document.getElementsByName( expando ).length;
 	});
 
-	// ID find and filter
+	// ID filter and find
 	if ( support.getById ) {
-		Expr.find["ID"] = function( id, context ) {
-			if ( typeof context.getElementById !== "undefined" && documentIsHTML ) {
-				var m = context.getElementById( id );
-				return m ? [ m ] : [];
-			}
-		};
 		Expr.filter["ID"] = function( id ) {
 			var attrId = id.replace( runescape, funescape );
 			return function( elem ) {
 				return elem.getAttribute("id") === attrId;
 			};
 		};
+		Expr.find["ID"] = function( id, context ) {
+			if ( typeof context.getElementById !== "undefined" && documentIsHTML ) {
+				var elem = context.getElementById( id );
+				return elem ? [ elem ] : [];
+			}
+		};
 	} else {
-		// Support: IE6/7
-		// getElementById is not reliable as a find shortcut
-		delete Expr.find["ID"];
-
 		Expr.filter["ID"] =  function( id ) {
 			var attrId = id.replace( runescape, funescape );
 			return function( elem ) {
@@ -87745,6 +87729,36 @@ setDocument = Sizzle.setDocument = function( node ) {
 					elem.getAttributeNode("id");
 				return node && node.value === attrId;
 			};
+		};
+
+		// Support: IE 6 - 7 only
+		// getElementById is not reliable as a find shortcut
+		Expr.find["ID"] = function( id, context ) {
+			if ( typeof context.getElementById !== "undefined" && documentIsHTML ) {
+				var node, i, elems,
+					elem = context.getElementById( id );
+
+				if ( elem ) {
+
+					// Verify the id attribute
+					node = elem.getAttributeNode("id");
+					if ( node && node.value === id ) {
+						return [ elem ];
+					}
+
+					// Fall back on getElementsByName
+					elems = context.getElementsByName( id );
+					i = 0;
+					while ( (elem = elems[i++]) ) {
+						node = elem.getAttributeNode("id");
+						if ( node && node.value === id ) {
+							return [ elem ];
+						}
+					}
+				}
+
+				return [];
+			}
 		};
 	}
 
@@ -88786,6 +88800,7 @@ function addCombinator( matcher, combinator, base ) {
 					return matcher( elem, context, xml );
 				}
 			}
+			return false;
 		} :
 
 		// Check against all ancestor/preceding elements
@@ -88830,6 +88845,7 @@ function addCombinator( matcher, combinator, base ) {
 					}
 				}
 			}
+			return false;
 		};
 }
 
@@ -89192,8 +89208,7 @@ select = Sizzle.select = function( selector, context, results, seed ) {
 		// Reduce context if the leading compound selector is an ID
 		tokens = match[0] = match[0].slice( 0 );
 		if ( tokens.length > 2 && (token = tokens[0]).type === "ID" &&
-				support.getById && context.nodeType === 9 && documentIsHTML &&
-				Expr.relative[ tokens[1].type ] ) {
+				context.nodeType === 9 && documentIsHTML && Expr.relative[ tokens[1].type ] ) {
 
 			context = ( Expr.find["ID"]( token.matches[0].replace(runescape, funescape), context ) || [] )[0];
 			if ( !context ) {
@@ -89375,24 +89390,29 @@ function winnow( elements, qualifier, not ) {
 		return jQuery.grep( elements, function( elem, i ) {
 			return !!qualifier.call( elem, i, elem ) !== not;
 		} );
-
 	}
 
+	// Single element
 	if ( qualifier.nodeType ) {
 		return jQuery.grep( elements, function( elem ) {
 			return ( elem === qualifier ) !== not;
 		} );
-
 	}
 
-	if ( typeof qualifier === "string" ) {
-		if ( risSimple.test( qualifier ) ) {
-			return jQuery.filter( qualifier, elements, not );
-		}
-
-		qualifier = jQuery.filter( qualifier, elements );
+	// Arraylike of elements (jQuery, arguments, Array)
+	if ( typeof qualifier !== "string" ) {
+		return jQuery.grep( elements, function( elem ) {
+			return ( indexOf.call( qualifier, elem ) > -1 ) !== not;
+		} );
 	}
 
+	// Simple selector that can be filtered directly, removing non-Elements
+	if ( risSimple.test( qualifier ) ) {
+		return jQuery.filter( qualifier, elements, not );
+	}
+
+	// Complex selector, compare the two sets, removing non-Elements
+	qualifier = jQuery.filter( qualifier, elements );
 	return jQuery.grep( elements, function( elem ) {
 		return ( indexOf.call( qualifier, elem ) > -1 ) !== not && elem.nodeType === 1;
 	} );
@@ -89405,11 +89425,13 @@ jQuery.filter = function( expr, elems, not ) {
 		expr = ":not(" + expr + ")";
 	}
 
-	return elems.length === 1 && elem.nodeType === 1 ?
-		jQuery.find.matchesSelector( elem, expr ) ? [ elem ] : [] :
-		jQuery.find.matches( expr, jQuery.grep( elems, function( elem ) {
-			return elem.nodeType === 1;
-		} ) );
+	if ( elems.length === 1 && elem.nodeType === 1 ) {
+		return jQuery.find.matchesSelector( elem, expr ) ? [ elem ] : [];
+	}
+
+	return jQuery.find.matches( expr, jQuery.grep( elems, function( elem ) {
+		return elem.nodeType === 1;
+	} ) );
 };
 
 jQuery.fn.extend( {
@@ -89737,14 +89759,14 @@ jQuery.each( {
 		return this.pushStack( matched );
 	};
 } );
-var rnotwhite = ( /\S+/g );
+var rnothtmlwhite = ( /[^\x20\t\r\n\f]+/g );
 
 
 
 // Convert String-formatted options into Object-formatted ones
 function createOptions( options ) {
 	var object = {};
-	jQuery.each( options.match( rnotwhite ) || [], function( _, flag ) {
+	jQuery.each( options.match( rnothtmlwhite ) || [], function( _, flag ) {
 		object[ flag ] = true;
 	} );
 	return object;
@@ -90509,13 +90531,16 @@ var access = function( elems, fn, key, value, chainable, emptyGet, raw ) {
 		}
 	}
 
-	return chainable ?
-		elems :
+	if ( chainable ) {
+		return elems;
+	}
 
-		// Gets
-		bulk ?
-			fn.call( elems ) :
-			len ? fn( elems[ 0 ], key ) : emptyGet;
+	// Gets
+	if ( bulk ) {
+		return fn.call( elems );
+	}
+
+	return len ? fn( elems[ 0 ], key ) : emptyGet;
 };
 var acceptData = function( owner ) {
 
@@ -90652,7 +90677,7 @@ Data.prototype = {
 				// Otherwise, create an array by matching non-whitespace
 				key = key in cache ?
 					[ key ] :
-					( key.match( rnotwhite ) || [] );
+					( key.match( rnothtmlwhite ) || [] );
 			}
 
 			i = key.length;
@@ -90700,6 +90725,31 @@ var dataUser = new Data();
 var rbrace = /^(?:\{[\w\W]*\}|\[[\w\W]*\])$/,
 	rmultiDash = /[A-Z]/g;
 
+function getData( data ) {
+	if ( data === "true" ) {
+		return true;
+	}
+
+	if ( data === "false" ) {
+		return false;
+	}
+
+	if ( data === "null" ) {
+		return null;
+	}
+
+	// Only convert to a number if it doesn't change the string
+	if ( data === +data + "" ) {
+		return +data;
+	}
+
+	if ( rbrace.test( data ) ) {
+		return JSON.parse( data );
+	}
+
+	return data;
+}
+
 function dataAttr( elem, key, data ) {
 	var name;
 
@@ -90711,14 +90761,7 @@ function dataAttr( elem, key, data ) {
 
 		if ( typeof data === "string" ) {
 			try {
-				data = data === "true" ? true :
-					data === "false" ? false :
-					data === "null" ? null :
-
-					// Only convert to a number if it doesn't change the string
-					+data + "" === data ? +data :
-					rbrace.test( data ) ? JSON.parse( data ) :
-					data;
+				data = getData( data );
 			} catch ( e ) {}
 
 			// Make sure we set the data so it isn't changed later
@@ -91095,7 +91138,7 @@ function getDefaultDisplay( elem ) {
 		return display;
 	}
 
-	temp = doc.body.appendChild( doc.createElement( nodeName ) ),
+	temp = doc.body.appendChild( doc.createElement( nodeName ) );
 	display = jQuery.css( temp, "display" );
 
 	temp.parentNode.removeChild( temp );
@@ -91213,15 +91256,23 @@ function getAll( context, tag ) {
 
 	// Support: IE <=9 - 11 only
 	// Use typeof to avoid zero-argument method invocation on host objects (#15151)
-	var ret = typeof context.getElementsByTagName !== "undefined" ?
-			context.getElementsByTagName( tag || "*" ) :
-			typeof context.querySelectorAll !== "undefined" ?
-				context.querySelectorAll( tag || "*" ) :
-			[];
+	var ret;
 
-	return tag === undefined || tag && jQuery.nodeName( context, tag ) ?
-		jQuery.merge( [ context ], ret ) :
-		ret;
+	if ( typeof context.getElementsByTagName !== "undefined" ) {
+		ret = context.getElementsByTagName( tag || "*" );
+
+	} else if ( typeof context.querySelectorAll !== "undefined" ) {
+		ret = context.querySelectorAll( tag || "*" );
+
+	} else {
+		ret = [];
+	}
+
+	if ( tag === undefined || tag && jQuery.nodeName( context, tag ) ) {
+		return jQuery.merge( [ context ], ret );
+	}
+
+	return ret;
 }
 
 
@@ -91495,7 +91546,7 @@ jQuery.event = {
 		}
 
 		// Handle multiple events separated by a space
-		types = ( types || "" ).match( rnotwhite ) || [ "" ];
+		types = ( types || "" ).match( rnothtmlwhite ) || [ "" ];
 		t = types.length;
 		while ( t-- ) {
 			tmp = rtypenamespace.exec( types[ t ] ) || [];
@@ -91577,7 +91628,7 @@ jQuery.event = {
 		}
 
 		// Once for each type.namespace in types; type may be omitted
-		types = ( types || "" ).match( rnotwhite ) || [ "" ];
+		types = ( types || "" ).match( rnothtmlwhite ) || [ "" ];
 		t = types.length;
 		while ( t-- ) {
 			tmp = rtypenamespace.exec( types[ t ] ) || [];
@@ -91703,51 +91754,58 @@ jQuery.event = {
 	},
 
 	handlers: function( event, handlers ) {
-		var i, matches, sel, handleObj,
+		var i, handleObj, sel, matchedHandlers, matchedSelectors,
 			handlerQueue = [],
 			delegateCount = handlers.delegateCount,
 			cur = event.target;
 
-		// Support: IE <=9
 		// Find delegate handlers
-		// Black-hole SVG <use> instance trees (#13180)
-		//
-		// Support: Firefox <=42
-		// Avoid non-left-click in FF but don't block IE radio events (#3861, gh-2343)
-		if ( delegateCount && cur.nodeType &&
-			( event.type !== "click" || isNaN( event.button ) || event.button < 1 ) ) {
+		if ( delegateCount &&
+
+			// Support: IE <=9
+			// Black-hole SVG <use> instance trees (trac-13180)
+			cur.nodeType &&
+
+			// Support: Firefox <=42
+			// Suppress spec-violating clicks indicating a non-primary pointer button (trac-3861)
+			// https://www.w3.org/TR/DOM-Level-3-Events/#event-type-click
+			// Support: IE 11 only
+			// ...but not arrow key "clicks" of radio inputs, which can have `button` -1 (gh-2343)
+			!( event.type === "click" && event.button >= 1 ) ) {
 
 			for ( ; cur !== this; cur = cur.parentNode || this ) {
 
 				// Don't check non-elements (#13208)
 				// Don't process clicks on disabled elements (#6911, #8165, #11382, #11764)
-				if ( cur.nodeType === 1 && ( cur.disabled !== true || event.type !== "click" ) ) {
-					matches = [];
+				if ( cur.nodeType === 1 && !( event.type === "click" && cur.disabled === true ) ) {
+					matchedHandlers = [];
+					matchedSelectors = {};
 					for ( i = 0; i < delegateCount; i++ ) {
 						handleObj = handlers[ i ];
 
 						// Don't conflict with Object.prototype properties (#13203)
 						sel = handleObj.selector + " ";
 
-						if ( matches[ sel ] === undefined ) {
-							matches[ sel ] = handleObj.needsContext ?
+						if ( matchedSelectors[ sel ] === undefined ) {
+							matchedSelectors[ sel ] = handleObj.needsContext ?
 								jQuery( sel, this ).index( cur ) > -1 :
 								jQuery.find( sel, this, null, [ cur ] ).length;
 						}
-						if ( matches[ sel ] ) {
-							matches.push( handleObj );
+						if ( matchedSelectors[ sel ] ) {
+							matchedHandlers.push( handleObj );
 						}
 					}
-					if ( matches.length ) {
-						handlerQueue.push( { elem: cur, handlers: matches } );
+					if ( matchedHandlers.length ) {
+						handlerQueue.push( { elem: cur, handlers: matchedHandlers } );
 					}
 				}
 			}
 		}
 
 		// Add the remaining (directly-bound) handlers
+		cur = this;
 		if ( delegateCount < handlers.length ) {
-			handlerQueue.push( { elem: this, handlers: handlers.slice( delegateCount ) } );
+			handlerQueue.push( { elem: cur, handlers: handlers.slice( delegateCount ) } );
 		}
 
 		return handlerQueue;
@@ -91981,7 +92039,19 @@ jQuery.each( {
 
 		// Add which for click: 1 === left; 2 === middle; 3 === right
 		if ( !event.which && button !== undefined && rmouseEvent.test( event.type ) ) {
-			return ( button & 1 ? 1 : ( button & 2 ? 3 : ( button & 4 ? 2 : 0 ) ) );
+			if ( button & 1 ) {
+				return 1;
+			}
+
+			if ( button & 2 ) {
+				return 3;
+			}
+
+			if ( button & 4 ) {
+				return 2;
+			}
+
+			return 0;
 		}
 
 		return event.which;
@@ -92737,15 +92807,17 @@ function setPositiveNumber( elem, value, subtract ) {
 }
 
 function augmentWidthOrHeight( elem, name, extra, isBorderBox, styles ) {
-	var i = extra === ( isBorderBox ? "border" : "content" ) ?
-
-		// If we already have the right measurement, avoid augmentation
-		4 :
-
-		// Otherwise initialize for horizontal or vertical properties
-		name === "width" ? 1 : 0,
-
+	var i,
 		val = 0;
+
+	// If we already have the right measurement, avoid augmentation
+	if ( extra === ( isBorderBox ? "border" : "content" ) ) {
+		i = 4;
+
+	// Otherwise initialize for horizontal or vertical properties
+	} else {
+		i = name === "width" ? 1 : 0;
+	}
 
 	for ( ; i < 4; i += 2 ) {
 
@@ -93599,7 +93671,7 @@ jQuery.Animation = jQuery.extend( Animation, {
 			callback = props;
 			props = [ "*" ];
 		} else {
-			props = props.match( rnotwhite );
+			props = props.match( rnothtmlwhite );
 		}
 
 		var prop,
@@ -93637,9 +93709,14 @@ jQuery.speed = function( speed, easing, fn ) {
 		opt.duration = 0;
 
 	} else {
-		opt.duration = typeof opt.duration === "number" ?
-			opt.duration : opt.duration in jQuery.fx.speeds ?
-				jQuery.fx.speeds[ opt.duration ] : jQuery.fx.speeds._default;
+		if ( typeof opt.duration !== "number" ) {
+			if ( opt.duration in jQuery.fx.speeds ) {
+				opt.duration = jQuery.fx.speeds[ opt.duration ];
+
+			} else {
+				opt.duration = jQuery.fx.speeds._default;
+			}
+		}
 	}
 
 	// Normalize opt.queue - true/undefined/null -> "fx"
@@ -93989,7 +94066,10 @@ jQuery.extend( {
 	removeAttr: function( elem, value ) {
 		var name,
 			i = 0,
-			attrNames = value && value.match( rnotwhite );
+
+			// Attribute names can contain non-HTML whitespace characters
+			// https://html.spec.whatwg.org/multipage/syntax.html#attributes-2
+			attrNames = value && value.match( rnothtmlwhite );
 
 		if ( attrNames && elem.nodeType === 1 ) {
 			while ( ( name = attrNames[ i++ ] ) ) {
@@ -94096,12 +94176,19 @@ jQuery.extend( {
 				// Use proper attribute retrieval(#12072)
 				var tabindex = jQuery.find.attr( elem, "tabindex" );
 
-				return tabindex ?
-					parseInt( tabindex, 10 ) :
+				if ( tabindex ) {
+					return parseInt( tabindex, 10 );
+				}
+
+				if (
 					rfocusable.test( elem.nodeName ) ||
-						rclickable.test( elem.nodeName ) && elem.href ?
-							0 :
-							-1;
+					rclickable.test( elem.nodeName ) &&
+					elem.href
+				) {
+					return 0;
+				}
+
+				return -1;
 			}
 		}
 	},
@@ -94118,9 +94205,14 @@ jQuery.extend( {
 // on the option
 // The getter ensures a default option is selected
 // when in an optgroup
+// eslint rule "no-unused-expressions" is disabled for this code
+// since it considers such accessions noop
 if ( !support.optSelected ) {
 	jQuery.propHooks.selected = {
 		get: function( elem ) {
+
+			/* eslint no-unused-expressions: "off" */
+
 			var parent = elem.parentNode;
 			if ( parent && parent.parentNode ) {
 				parent.parentNode.selectedIndex;
@@ -94128,6 +94220,9 @@ if ( !support.optSelected ) {
 			return null;
 		},
 		set: function( elem ) {
+
+			/* eslint no-unused-expressions: "off" */
+
 			var parent = elem.parentNode;
 			if ( parent ) {
 				parent.selectedIndex;
@@ -94158,7 +94253,13 @@ jQuery.each( [
 
 
 
-var rclass = /[\t\r\n\f]/g;
+	// Strip and collapse whitespace according to HTML spec
+	// https://html.spec.whatwg.org/multipage/infrastructure.html#strip-and-collapse-whitespace
+	function stripAndCollapse( value ) {
+		var tokens = value.match( rnothtmlwhite ) || [];
+		return tokens.join( " " );
+	}
+
 
 function getClass( elem ) {
 	return elem.getAttribute && elem.getAttribute( "class" ) || "";
@@ -94176,12 +94277,11 @@ jQuery.fn.extend( {
 		}
 
 		if ( typeof value === "string" && value ) {
-			classes = value.match( rnotwhite ) || [];
+			classes = value.match( rnothtmlwhite ) || [];
 
 			while ( ( elem = this[ i++ ] ) ) {
 				curValue = getClass( elem );
-				cur = elem.nodeType === 1 &&
-					( " " + curValue + " " ).replace( rclass, " " );
+				cur = elem.nodeType === 1 && ( " " + stripAndCollapse( curValue ) + " " );
 
 				if ( cur ) {
 					j = 0;
@@ -94192,7 +94292,7 @@ jQuery.fn.extend( {
 					}
 
 					// Only assign if different to avoid unneeded rendering.
-					finalValue = jQuery.trim( cur );
+					finalValue = stripAndCollapse( cur );
 					if ( curValue !== finalValue ) {
 						elem.setAttribute( "class", finalValue );
 					}
@@ -94218,14 +94318,13 @@ jQuery.fn.extend( {
 		}
 
 		if ( typeof value === "string" && value ) {
-			classes = value.match( rnotwhite ) || [];
+			classes = value.match( rnothtmlwhite ) || [];
 
 			while ( ( elem = this[ i++ ] ) ) {
 				curValue = getClass( elem );
 
 				// This expression is here for better compressibility (see addClass)
-				cur = elem.nodeType === 1 &&
-					( " " + curValue + " " ).replace( rclass, " " );
+				cur = elem.nodeType === 1 && ( " " + stripAndCollapse( curValue ) + " " );
 
 				if ( cur ) {
 					j = 0;
@@ -94238,7 +94337,7 @@ jQuery.fn.extend( {
 					}
 
 					// Only assign if different to avoid unneeded rendering.
-					finalValue = jQuery.trim( cur );
+					finalValue = stripAndCollapse( cur );
 					if ( curValue !== finalValue ) {
 						elem.setAttribute( "class", finalValue );
 					}
@@ -94273,7 +94372,7 @@ jQuery.fn.extend( {
 				// Toggle individual class names
 				i = 0;
 				self = jQuery( this );
-				classNames = value.match( rnotwhite ) || [];
+				classNames = value.match( rnothtmlwhite ) || [];
 
 				while ( ( className = classNames[ i++ ] ) ) {
 
@@ -94316,10 +94415,8 @@ jQuery.fn.extend( {
 		className = " " + selector + " ";
 		while ( ( elem = this[ i++ ] ) ) {
 			if ( elem.nodeType === 1 &&
-				( " " + getClass( elem ) + " " ).replace( rclass, " " )
-					.indexOf( className ) > -1
-			) {
-				return true;
+				( " " + stripAndCollapse( getClass( elem ) ) + " " ).indexOf( className ) > -1 ) {
+					return true;
 			}
 		}
 
@@ -94330,8 +94427,7 @@ jQuery.fn.extend( {
 
 
 
-var rreturn = /\r/g,
-	rspaces = /[\x20\t\r\n\f]+/g;
+var rreturn = /\r/g;
 
 jQuery.fn.extend( {
 	val: function( value ) {
@@ -94352,13 +94448,13 @@ jQuery.fn.extend( {
 
 				ret = elem.value;
 
-				return typeof ret === "string" ?
+				// Handle most common string cases
+				if ( typeof ret === "string" ) {
+					return ret.replace( rreturn, "" );
+				}
 
-					// Handle most common string cases
-					ret.replace( rreturn, "" ) :
-
-					// Handle cases where value is null/undef or number
-					ret == null ? "" : ret;
+				// Handle cases where value is null/undef or number
+				return ret == null ? "" : ret;
 			}
 
 			return;
@@ -94415,20 +94511,24 @@ jQuery.extend( {
 					// option.text throws exceptions (#14686, #14858)
 					// Strip and collapse whitespace
 					// https://html.spec.whatwg.org/#strip-and-collapse-whitespace
-					jQuery.trim( jQuery.text( elem ) ).replace( rspaces, " " );
+					stripAndCollapse( jQuery.text( elem ) );
 			}
 		},
 		select: {
 			get: function( elem ) {
-				var value, option,
+				var value, option, i,
 					options = elem.options,
 					index = elem.selectedIndex,
 					one = elem.type === "select-one",
 					values = one ? null : [],
-					max = one ? index + 1 : options.length,
-					i = index < 0 ?
-						max :
-						one ? index : 0;
+					max = one ? index + 1 : options.length;
+
+				if ( index < 0 ) {
+					i = max;
+
+				} else {
+					i = one ? index : 0;
+				}
 
 				// Loop through all the selected options
 				for ( ; i < max; i++ ) {
@@ -94882,13 +94982,17 @@ jQuery.fn.extend( {
 		.map( function( i, elem ) {
 			var val = jQuery( this ).val();
 
-			return val == null ?
-				null :
-				jQuery.isArray( val ) ?
-					jQuery.map( val, function( val ) {
-						return { name: elem.name, value: val.replace( rCRLF, "\r\n" ) };
-					} ) :
-					{ name: elem.name, value: val.replace( rCRLF, "\r\n" ) };
+			if ( val == null ) {
+				return null;
+			}
+
+			if ( jQuery.isArray( val ) ) {
+				return jQuery.map( val, function( val ) {
+					return { name: elem.name, value: val.replace( rCRLF, "\r\n" ) };
+				} );
+			}
+
+			return { name: elem.name, value: val.replace( rCRLF, "\r\n" ) };
 		} ).get();
 	}
 } );
@@ -94897,7 +95001,7 @@ jQuery.fn.extend( {
 var
 	r20 = /%20/g,
 	rhash = /#.*$/,
-	rts = /([?&])_=[^&]*/,
+	rantiCache = /([?&])_=[^&]*/,
 	rheaders = /^(.*?):[ \t]*([^\r\n]*)$/mg,
 
 	// #7653, #8125, #8152: local protocol detection
@@ -94943,7 +95047,7 @@ function addToPrefiltersOrTransports( structure ) {
 
 		var dataType,
 			i = 0,
-			dataTypes = dataTypeExpression.toLowerCase().match( rnotwhite ) || [];
+			dataTypes = dataTypeExpression.toLowerCase().match( rnothtmlwhite ) || [];
 
 		if ( jQuery.isFunction( func ) ) {
 
@@ -95411,7 +95515,7 @@ jQuery.extend( {
 		s.type = options.method || options.type || s.method || s.type;
 
 		// Extract dataTypes list
-		s.dataTypes = ( s.dataType || "*" ).toLowerCase().match( rnotwhite ) || [ "" ];
+		s.dataTypes = ( s.dataType || "*" ).toLowerCase().match( rnothtmlwhite ) || [ "" ];
 
 		// A cross-domain request is in order when the origin doesn't match the current origin.
 		if ( s.crossDomain == null ) {
@@ -95483,9 +95587,9 @@ jQuery.extend( {
 				delete s.data;
 			}
 
-			// Add anti-cache in uncached url if needed
+			// Add or update anti-cache param if needed
 			if ( s.cache === false ) {
-				cacheURL = cacheURL.replace( rts, "" );
+				cacheURL = cacheURL.replace( rantiCache, "$1" );
 				uncached = ( rquery.test( cacheURL ) ? "&" : "?" ) + "_=" + ( nonce++ ) + uncached;
 			}
 
@@ -96224,7 +96328,7 @@ jQuery.fn.load = function( url, params, callback ) {
 		off = url.indexOf( " " );
 
 	if ( off > -1 ) {
-		selector = jQuery.trim( url.slice( off ) );
+		selector = stripAndCollapse( url.slice( off ) );
 		url = url.slice( 0, off );
 	}
 
@@ -96616,7 +96720,6 @@ if ( typeof define === "function" && define.amd ) {
 
 
 
-
 var
 
 	// Map over jQuery in case of overwrite
@@ -96645,10 +96748,13 @@ if ( !noGlobal ) {
 }
 
 
+
+
+
 return jQuery;
 } );
 
-},{}]},{},[1,531])
+},{}]},{},[1,530])
 
 
 //# sourceMappingURL=app.bundle.js.map
