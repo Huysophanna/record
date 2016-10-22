@@ -367,7 +367,7 @@ var RecordingPage = (function () {
 }());
 exports.RecordingPage = RecordingPage;
 
-},{"@angular/core":153,"ionic-angular":417,"jquery":531}],4:[function(require,module,exports){
+},{"@angular/core":153,"ionic-angular":417,"jquery":511}],4:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1494,7 +1494,7 @@ var EventEmitter = (function (_super) {
 }(Subject_1.Subject));
 exports.EventEmitter = EventEmitter;
 
-},{"./lang":24,"./promise":25,"rxjs/Observable":511,"rxjs/Subject":513,"rxjs/observable/PromiseObservable":517,"rxjs/operator/toPromise":518}],19:[function(require,module,exports){
+},{"./lang":24,"./promise":25,"rxjs/Observable":512,"rxjs/Subject":514,"rxjs/observable/PromiseObservable":518,"rxjs/operator/toPromise":519}],19:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -10423,7 +10423,7 @@ var SimpleExpressionChecker = (function () {
 
 },{"../facade/collection":91,"../facade/exceptions":93,"../facade/lang":94,"../interpolation_config":108,"./ast":86,"./lexer":87,"@angular/core":153}],89:[function(require,module,exports){
 arguments[4][18][0].apply(exports,arguments)
-},{"./lang":94,"./promise":96,"dup":18,"rxjs/Observable":511,"rxjs/Subject":513,"rxjs/observable/PromiseObservable":517,"rxjs/operator/toPromise":518}],90:[function(require,module,exports){
+},{"./lang":94,"./promise":96,"dup":18,"rxjs/Observable":512,"rxjs/Subject":514,"rxjs/observable/PromiseObservable":518,"rxjs/operator/toPromise":519}],90:[function(require,module,exports){
 arguments[4][19][0].apply(exports,arguments)
 },{"dup":19}],91:[function(require,module,exports){
 arguments[4][20][0].apply(exports,arguments)
@@ -28663,7 +28663,7 @@ function _createDependency(token /** TODO #9100 */, optional /** TODO #9100 */, 
 
 },{"../facade/collection":194,"../facade/lang":197,"../reflection/reflection":227,"./forward_ref":182,"./metadata":184,"./provider":186,"./provider_util":187,"./reflective_exceptions":188,"./reflective_key":190}],192:[function(require,module,exports){
 arguments[4][18][0].apply(exports,arguments)
-},{"./lang":197,"./promise":199,"dup":18,"rxjs/Observable":511,"rxjs/Subject":513,"rxjs/observable/PromiseObservable":517,"rxjs/operator/toPromise":518}],193:[function(require,module,exports){
+},{"./lang":197,"./promise":199,"dup":18,"rxjs/Observable":512,"rxjs/Subject":514,"rxjs/observable/PromiseObservable":518,"rxjs/operator/toPromise":519}],193:[function(require,module,exports){
 arguments[4][19][0].apply(exports,arguments)
 },{"dup":19}],194:[function(require,module,exports){
 arguments[4][20][0].apply(exports,arguments)
@@ -36117,7 +36117,7 @@ var JSONPBackend_ = (function (_super) {
 }(JSONPBackend));
 exports.JSONPBackend_ = JSONPBackend_;
 
-},{"../base_response_options":247,"../enums":248,"../facade/exceptions":252,"../facade/lang":253,"../interfaces":257,"../static_response":259,"./browser_jsonp":242,"@angular/core":153,"rxjs/Observable":511}],245:[function(require,module,exports){
+},{"../base_response_options":247,"../enums":248,"../facade/exceptions":252,"../facade/lang":253,"../interfaces":257,"../static_response":259,"./browser_jsonp":242,"@angular/core":153,"rxjs/Observable":512}],245:[function(require,module,exports){
 "use strict";
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
@@ -36288,7 +36288,7 @@ var XHRBackend = (function () {
 }());
 exports.XHRBackend = XHRBackend;
 
-},{"../base_response_options":247,"../enums":248,"../facade/lang":253,"../headers":254,"../http_utils":256,"../interfaces":257,"../static_response":259,"./browser_xhr":243,"@angular/core":153,"@angular/platform-browser":273,"rxjs/Observable":511}],246:[function(require,module,exports){
+},{"../base_response_options":247,"../enums":248,"../facade/lang":253,"../headers":254,"../http_utils":256,"../interfaces":257,"../static_response":259,"./browser_xhr":243,"@angular/core":153,"@angular/platform-browser":273,"rxjs/Observable":512}],246:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -37872,7 +37872,7 @@ exports.bootstrapWorkerApp = bootstrapWorkerApp;
 
 },{"./core_private":261,"./src/facade/async":263,"./src/facade/lang":268,"./src/xhr/xhr_cache":270,"./src/xhr/xhr_impl":271,"@angular/common":7,"@angular/compiler":72,"@angular/core":153,"@angular/platform-browser":273}],263:[function(require,module,exports){
 arguments[4][18][0].apply(exports,arguments)
-},{"./lang":268,"./promise":269,"dup":18,"rxjs/Observable":511,"rxjs/Subject":513,"rxjs/observable/PromiseObservable":517,"rxjs/operator/toPromise":518}],264:[function(require,module,exports){
+},{"./lang":268,"./promise":269,"dup":18,"rxjs/Observable":512,"rxjs/Subject":514,"rxjs/observable/PromiseObservable":518,"rxjs/operator/toPromise":519}],264:[function(require,module,exports){
 arguments[4][19][0].apply(exports,arguments)
 },{"dup":19}],265:[function(require,module,exports){
 arguments[4][20][0].apply(exports,arguments)
@@ -40466,7 +40466,7 @@ exports.WebAnimationsPlayer = WebAnimationsPlayer;
 
 },{"../facade/lang":304}],298:[function(require,module,exports){
 arguments[4][18][0].apply(exports,arguments)
-},{"./lang":304,"./promise":305,"dup":18,"rxjs/Observable":511,"rxjs/Subject":513,"rxjs/observable/PromiseObservable":517,"rxjs/operator/toPromise":518}],299:[function(require,module,exports){
+},{"./lang":304,"./promise":305,"dup":18,"rxjs/Observable":512,"rxjs/Subject":514,"rxjs/observable/PromiseObservable":518,"rxjs/operator/toPromise":519}],299:[function(require,module,exports){
 arguments[4][19][0].apply(exports,arguments)
 },{"dup":19}],300:[function(require,module,exports){
 "use strict";
@@ -76356,7 +76356,7 @@ var ThreeDeeTouch = (function () {
 }());
 exports.ThreeDeeTouch = ThreeDeeTouch;
 
-},{"./plugin":495,"rxjs/Observable":511}],447:[function(require,module,exports){
+},{"./plugin":495,"rxjs/Observable":512}],447:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -81201,7 +81201,7 @@ var Geolocation = (function () {
 }());
 exports.Geolocation = Geolocation;
 
-},{"./plugin":495,"rxjs/Observable":511}],481:[function(require,module,exports){
+},{"./plugin":495,"rxjs/Observable":512}],481:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -82548,7 +82548,7 @@ var GoogleMapsLatLng = (function () {
 }());
 exports.GoogleMapsLatLng = GoogleMapsLatLng;
 
-},{"./plugin":495,"rxjs/Observable":511}],485:[function(require,module,exports){
+},{"./plugin":495,"rxjs/Observable":512}],485:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -83620,7 +83620,7 @@ var MediaError = (function () {
 }());
 exports.MediaError = MediaError;
 
-},{"./plugin":495,"rxjs/Observable":511}],494:[function(require,module,exports){
+},{"./plugin":495,"rxjs/Observable":512}],494:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -84095,7 +84095,7 @@ function InstanceProperty(target, key, descriptor) {
 }
 exports.InstanceProperty = InstanceProperty;
 
-},{"../util":510,"rxjs/Observable":511}],496:[function(require,module,exports){
+},{"../util":510,"rxjs/Observable":512}],496:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -85475,1064 +85475,6 @@ exports.get = get;
 ;
 
 },{}],511:[function(require,module,exports){
-"use strict";
-var root_1 = require('./util/root');
-var toSubscriber_1 = require('./util/toSubscriber');
-var observable_1 = require('./symbol/observable');
-/**
- * A representation of any set of values over any amount of time. This the most basic building block
- * of RxJS.
- *
- * @class Observable<T>
- */
-var Observable = (function () {
-    /**
-     * @constructor
-     * @param {Function} subscribe the function that is  called when the Observable is
-     * initially subscribed to. This function is given a Subscriber, to which new values
-     * can be `next`ed, or an `error` method can be called to raise an error, or
-     * `complete` can be called to notify of a successful completion.
-     */
-    function Observable(subscribe) {
-        this._isScalar = false;
-        if (subscribe) {
-            this._subscribe = subscribe;
-        }
-    }
-    /**
-     * Creates a new Observable, with this Observable as the source, and the passed
-     * operator defined as the new observable's operator.
-     * @method lift
-     * @param {Operator} operator the operator defining the operation to take on the observable
-     * @return {Observable} a new observable with the Operator applied
-     */
-    Observable.prototype.lift = function (operator) {
-        var observable = new Observable();
-        observable.source = this;
-        observable.operator = operator;
-        return observable;
-    };
-    Observable.prototype.subscribe = function (observerOrNext, error, complete) {
-        var operator = this.operator;
-        var sink = toSubscriber_1.toSubscriber(observerOrNext, error, complete);
-        if (operator) {
-            operator.call(sink, this);
-        }
-        else {
-            sink.add(this._subscribe(sink));
-        }
-        if (sink.syncErrorThrowable) {
-            sink.syncErrorThrowable = false;
-            if (sink.syncErrorThrown) {
-                throw sink.syncErrorValue;
-            }
-        }
-        return sink;
-    };
-    /**
-     * @method forEach
-     * @param {Function} next a handler for each value emitted by the observable
-     * @param {PromiseConstructor} [PromiseCtor] a constructor function used to instantiate the Promise
-     * @return {Promise} a promise that either resolves on observable completion or
-     *  rejects with the handled error
-     */
-    Observable.prototype.forEach = function (next, PromiseCtor) {
-        var _this = this;
-        if (!PromiseCtor) {
-            if (root_1.root.Rx && root_1.root.Rx.config && root_1.root.Rx.config.Promise) {
-                PromiseCtor = root_1.root.Rx.config.Promise;
-            }
-            else if (root_1.root.Promise) {
-                PromiseCtor = root_1.root.Promise;
-            }
-        }
-        if (!PromiseCtor) {
-            throw new Error('no Promise impl found');
-        }
-        return new PromiseCtor(function (resolve, reject) {
-            var subscription = _this.subscribe(function (value) {
-                if (subscription) {
-                    // if there is a subscription, then we can surmise
-                    // the next handling is asynchronous. Any errors thrown
-                    // need to be rejected explicitly and unsubscribe must be
-                    // called manually
-                    try {
-                        next(value);
-                    }
-                    catch (err) {
-                        reject(err);
-                        subscription.unsubscribe();
-                    }
-                }
-                else {
-                    // if there is NO subscription, then we're getting a nexted
-                    // value synchronously during subscription. We can just call it.
-                    // If it errors, Observable's `subscribe` will ensure the
-                    // unsubscription logic is called, then synchronously rethrow the error.
-                    // After that, Promise will trap the error and send it
-                    // down the rejection path.
-                    next(value);
-                }
-            }, reject, resolve);
-        });
-    };
-    Observable.prototype._subscribe = function (subscriber) {
-        return this.source.subscribe(subscriber);
-    };
-    /**
-     * An interop point defined by the es7-observable spec https://github.com/zenparsing/es-observable
-     * @method Symbol.observable
-     * @return {Observable} this instance of the observable
-     */
-    Observable.prototype[observable_1.$$observable] = function () {
-        return this;
-    };
-    // HACK: Since TypeScript inherits static properties too, we have to
-    // fight against TypeScript here so Subject can have a different static create signature
-    /**
-     * Creates a new cold Observable by calling the Observable constructor
-     * @static true
-     * @owner Observable
-     * @method create
-     * @param {Function} subscribe? the subscriber function to be passed to the Observable constructor
-     * @return {Observable} a new cold observable
-     */
-    Observable.create = function (subscribe) {
-        return new Observable(subscribe);
-    };
-    return Observable;
-}());
-exports.Observable = Observable;
-
-},{"./symbol/observable":519,"./util/root":527,"./util/toSubscriber":528}],512:[function(require,module,exports){
-"use strict";
-exports.empty = {
-    closed: true,
-    next: function (value) { },
-    error: function (err) { throw err; },
-    complete: function () { }
-};
-
-},{}],513:[function(require,module,exports){
-"use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var Observable_1 = require('./Observable');
-var Subscriber_1 = require('./Subscriber');
-var Subscription_1 = require('./Subscription');
-var ObjectUnsubscribedError_1 = require('./util/ObjectUnsubscribedError');
-var SubjectSubscription_1 = require('./SubjectSubscription');
-var rxSubscriber_1 = require('./symbol/rxSubscriber');
-/**
- * @class SubjectSubscriber<T>
- */
-var SubjectSubscriber = (function (_super) {
-    __extends(SubjectSubscriber, _super);
-    function SubjectSubscriber(destination) {
-        _super.call(this, destination);
-        this.destination = destination;
-    }
-    return SubjectSubscriber;
-}(Subscriber_1.Subscriber));
-exports.SubjectSubscriber = SubjectSubscriber;
-/**
- * @class Subject<T>
- */
-var Subject = (function (_super) {
-    __extends(Subject, _super);
-    function Subject() {
-        _super.call(this);
-        this.observers = [];
-        this.closed = false;
-        this.isStopped = false;
-        this.hasError = false;
-        this.thrownError = null;
-    }
-    Subject.prototype[rxSubscriber_1.$$rxSubscriber] = function () {
-        return new SubjectSubscriber(this);
-    };
-    Subject.prototype.lift = function (operator) {
-        var subject = new AnonymousSubject(this, this);
-        subject.operator = operator;
-        return subject;
-    };
-    Subject.prototype.next = function (value) {
-        if (this.closed) {
-            throw new ObjectUnsubscribedError_1.ObjectUnsubscribedError();
-        }
-        if (!this.isStopped) {
-            var observers = this.observers;
-            var len = observers.length;
-            var copy = observers.slice();
-            for (var i = 0; i < len; i++) {
-                copy[i].next(value);
-            }
-        }
-    };
-    Subject.prototype.error = function (err) {
-        if (this.closed) {
-            throw new ObjectUnsubscribedError_1.ObjectUnsubscribedError();
-        }
-        this.hasError = true;
-        this.thrownError = err;
-        this.isStopped = true;
-        var observers = this.observers;
-        var len = observers.length;
-        var copy = observers.slice();
-        for (var i = 0; i < len; i++) {
-            copy[i].error(err);
-        }
-        this.observers.length = 0;
-    };
-    Subject.prototype.complete = function () {
-        if (this.closed) {
-            throw new ObjectUnsubscribedError_1.ObjectUnsubscribedError();
-        }
-        this.isStopped = true;
-        var observers = this.observers;
-        var len = observers.length;
-        var copy = observers.slice();
-        for (var i = 0; i < len; i++) {
-            copy[i].complete();
-        }
-        this.observers.length = 0;
-    };
-    Subject.prototype.unsubscribe = function () {
-        this.isStopped = true;
-        this.closed = true;
-        this.observers = null;
-    };
-    Subject.prototype._subscribe = function (subscriber) {
-        if (this.closed) {
-            throw new ObjectUnsubscribedError_1.ObjectUnsubscribedError();
-        }
-        else if (this.hasError) {
-            subscriber.error(this.thrownError);
-            return Subscription_1.Subscription.EMPTY;
-        }
-        else if (this.isStopped) {
-            subscriber.complete();
-            return Subscription_1.Subscription.EMPTY;
-        }
-        else {
-            this.observers.push(subscriber);
-            return new SubjectSubscription_1.SubjectSubscription(this, subscriber);
-        }
-    };
-    Subject.prototype.asObservable = function () {
-        var observable = new Observable_1.Observable();
-        observable.source = this;
-        return observable;
-    };
-    Subject.create = function (destination, source) {
-        return new AnonymousSubject(destination, source);
-    };
-    return Subject;
-}(Observable_1.Observable));
-exports.Subject = Subject;
-/**
- * @class AnonymousSubject<T>
- */
-var AnonymousSubject = (function (_super) {
-    __extends(AnonymousSubject, _super);
-    function AnonymousSubject(destination, source) {
-        _super.call(this);
-        this.destination = destination;
-        this.source = source;
-    }
-    AnonymousSubject.prototype.next = function (value) {
-        var destination = this.destination;
-        if (destination && destination.next) {
-            destination.next(value);
-        }
-    };
-    AnonymousSubject.prototype.error = function (err) {
-        var destination = this.destination;
-        if (destination && destination.error) {
-            this.destination.error(err);
-        }
-    };
-    AnonymousSubject.prototype.complete = function () {
-        var destination = this.destination;
-        if (destination && destination.complete) {
-            this.destination.complete();
-        }
-    };
-    AnonymousSubject.prototype._subscribe = function (subscriber) {
-        var source = this.source;
-        if (source) {
-            return this.source.subscribe(subscriber);
-        }
-        else {
-            return Subscription_1.Subscription.EMPTY;
-        }
-    };
-    return AnonymousSubject;
-}(Subject));
-exports.AnonymousSubject = AnonymousSubject;
-
-},{"./Observable":511,"./SubjectSubscription":514,"./Subscriber":515,"./Subscription":516,"./symbol/rxSubscriber":520,"./util/ObjectUnsubscribedError":521}],514:[function(require,module,exports){
-"use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var Subscription_1 = require('./Subscription');
-/**
- * We need this JSDoc comment for affecting ESDoc.
- * @ignore
- * @extends {Ignored}
- */
-var SubjectSubscription = (function (_super) {
-    __extends(SubjectSubscription, _super);
-    function SubjectSubscription(subject, subscriber) {
-        _super.call(this);
-        this.subject = subject;
-        this.subscriber = subscriber;
-        this.closed = false;
-    }
-    SubjectSubscription.prototype.unsubscribe = function () {
-        if (this.closed) {
-            return;
-        }
-        this.closed = true;
-        var subject = this.subject;
-        var observers = subject.observers;
-        this.subject = null;
-        if (!observers || observers.length === 0 || subject.isStopped || subject.closed) {
-            return;
-        }
-        var subscriberIndex = observers.indexOf(this.subscriber);
-        if (subscriberIndex !== -1) {
-            observers.splice(subscriberIndex, 1);
-        }
-    };
-    return SubjectSubscription;
-}(Subscription_1.Subscription));
-exports.SubjectSubscription = SubjectSubscription;
-
-},{"./Subscription":516}],515:[function(require,module,exports){
-"use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var isFunction_1 = require('./util/isFunction');
-var Subscription_1 = require('./Subscription');
-var Observer_1 = require('./Observer');
-var rxSubscriber_1 = require('./symbol/rxSubscriber');
-/**
- * Implements the {@link Observer} interface and extends the
- * {@link Subscription} class. While the {@link Observer} is the public API for
- * consuming the values of an {@link Observable}, all Observers get converted to
- * a Subscriber, in order to provide Subscription-like capabilities such as
- * `unsubscribe`. Subscriber is a common type in RxJS, and crucial for
- * implementing operators, but it is rarely used as a public API.
- *
- * @class Subscriber<T>
- */
-var Subscriber = (function (_super) {
-    __extends(Subscriber, _super);
-    /**
-     * @param {Observer|function(value: T): void} [destinationOrNext] A partially
-     * defined Observer or a `next` callback function.
-     * @param {function(e: ?any): void} [error] The `error` callback of an
-     * Observer.
-     * @param {function(): void} [complete] The `complete` callback of an
-     * Observer.
-     */
-    function Subscriber(destinationOrNext, error, complete) {
-        _super.call(this);
-        this.syncErrorValue = null;
-        this.syncErrorThrown = false;
-        this.syncErrorThrowable = false;
-        this.isStopped = false;
-        switch (arguments.length) {
-            case 0:
-                this.destination = Observer_1.empty;
-                break;
-            case 1:
-                if (!destinationOrNext) {
-                    this.destination = Observer_1.empty;
-                    break;
-                }
-                if (typeof destinationOrNext === 'object') {
-                    if (destinationOrNext instanceof Subscriber) {
-                        this.destination = destinationOrNext;
-                        this.destination.add(this);
-                    }
-                    else {
-                        this.syncErrorThrowable = true;
-                        this.destination = new SafeSubscriber(this, destinationOrNext);
-                    }
-                    break;
-                }
-            default:
-                this.syncErrorThrowable = true;
-                this.destination = new SafeSubscriber(this, destinationOrNext, error, complete);
-                break;
-        }
-    }
-    Subscriber.prototype[rxSubscriber_1.$$rxSubscriber] = function () { return this; };
-    /**
-     * A static factory for a Subscriber, given a (potentially partial) definition
-     * of an Observer.
-     * @param {function(x: ?T): void} [next] The `next` callback of an Observer.
-     * @param {function(e: ?any): void} [error] The `error` callback of an
-     * Observer.
-     * @param {function(): void} [complete] The `complete` callback of an
-     * Observer.
-     * @return {Subscriber<T>} A Subscriber wrapping the (partially defined)
-     * Observer represented by the given arguments.
-     */
-    Subscriber.create = function (next, error, complete) {
-        var subscriber = new Subscriber(next, error, complete);
-        subscriber.syncErrorThrowable = false;
-        return subscriber;
-    };
-    /**
-     * The {@link Observer} callback to receive notifications of type `next` from
-     * the Observable, with a value. The Observable may call this method 0 or more
-     * times.
-     * @param {T} [value] The `next` value.
-     * @return {void}
-     */
-    Subscriber.prototype.next = function (value) {
-        if (!this.isStopped) {
-            this._next(value);
-        }
-    };
-    /**
-     * The {@link Observer} callback to receive notifications of type `error` from
-     * the Observable, with an attached {@link Error}. Notifies the Observer that
-     * the Observable has experienced an error condition.
-     * @param {any} [err] The `error` exception.
-     * @return {void}
-     */
-    Subscriber.prototype.error = function (err) {
-        if (!this.isStopped) {
-            this.isStopped = true;
-            this._error(err);
-        }
-    };
-    /**
-     * The {@link Observer} callback to receive a valueless notification of type
-     * `complete` from the Observable. Notifies the Observer that the Observable
-     * has finished sending push-based notifications.
-     * @return {void}
-     */
-    Subscriber.prototype.complete = function () {
-        if (!this.isStopped) {
-            this.isStopped = true;
-            this._complete();
-        }
-    };
-    Subscriber.prototype.unsubscribe = function () {
-        if (this.closed) {
-            return;
-        }
-        this.isStopped = true;
-        _super.prototype.unsubscribe.call(this);
-    };
-    Subscriber.prototype._next = function (value) {
-        this.destination.next(value);
-    };
-    Subscriber.prototype._error = function (err) {
-        this.destination.error(err);
-        this.unsubscribe();
-    };
-    Subscriber.prototype._complete = function () {
-        this.destination.complete();
-        this.unsubscribe();
-    };
-    return Subscriber;
-}(Subscription_1.Subscription));
-exports.Subscriber = Subscriber;
-/**
- * We need this JSDoc comment for affecting ESDoc.
- * @ignore
- * @extends {Ignored}
- */
-var SafeSubscriber = (function (_super) {
-    __extends(SafeSubscriber, _super);
-    function SafeSubscriber(_parent, observerOrNext, error, complete) {
-        _super.call(this);
-        this._parent = _parent;
-        var next;
-        var context = this;
-        if (isFunction_1.isFunction(observerOrNext)) {
-            next = observerOrNext;
-        }
-        else if (observerOrNext) {
-            context = observerOrNext;
-            next = observerOrNext.next;
-            error = observerOrNext.error;
-            complete = observerOrNext.complete;
-            if (isFunction_1.isFunction(context.unsubscribe)) {
-                this.add(context.unsubscribe.bind(context));
-            }
-            context.unsubscribe = this.unsubscribe.bind(this);
-        }
-        this._context = context;
-        this._next = next;
-        this._error = error;
-        this._complete = complete;
-    }
-    SafeSubscriber.prototype.next = function (value) {
-        if (!this.isStopped && this._next) {
-            var _parent = this._parent;
-            if (!_parent.syncErrorThrowable) {
-                this.__tryOrUnsub(this._next, value);
-            }
-            else if (this.__tryOrSetError(_parent, this._next, value)) {
-                this.unsubscribe();
-            }
-        }
-    };
-    SafeSubscriber.prototype.error = function (err) {
-        if (!this.isStopped) {
-            var _parent = this._parent;
-            if (this._error) {
-                if (!_parent.syncErrorThrowable) {
-                    this.__tryOrUnsub(this._error, err);
-                    this.unsubscribe();
-                }
-                else {
-                    this.__tryOrSetError(_parent, this._error, err);
-                    this.unsubscribe();
-                }
-            }
-            else if (!_parent.syncErrorThrowable) {
-                this.unsubscribe();
-                throw err;
-            }
-            else {
-                _parent.syncErrorValue = err;
-                _parent.syncErrorThrown = true;
-                this.unsubscribe();
-            }
-        }
-    };
-    SafeSubscriber.prototype.complete = function () {
-        if (!this.isStopped) {
-            var _parent = this._parent;
-            if (this._complete) {
-                if (!_parent.syncErrorThrowable) {
-                    this.__tryOrUnsub(this._complete);
-                    this.unsubscribe();
-                }
-                else {
-                    this.__tryOrSetError(_parent, this._complete);
-                    this.unsubscribe();
-                }
-            }
-            else {
-                this.unsubscribe();
-            }
-        }
-    };
-    SafeSubscriber.prototype.__tryOrUnsub = function (fn, value) {
-        try {
-            fn.call(this._context, value);
-        }
-        catch (err) {
-            this.unsubscribe();
-            throw err;
-        }
-    };
-    SafeSubscriber.prototype.__tryOrSetError = function (parent, fn, value) {
-        try {
-            fn.call(this._context, value);
-        }
-        catch (err) {
-            parent.syncErrorValue = err;
-            parent.syncErrorThrown = true;
-            return true;
-        }
-        return false;
-    };
-    SafeSubscriber.prototype._unsubscribe = function () {
-        var _parent = this._parent;
-        this._context = null;
-        this._parent = null;
-        _parent.unsubscribe();
-    };
-    return SafeSubscriber;
-}(Subscriber));
-
-},{"./Observer":512,"./Subscription":516,"./symbol/rxSubscriber":520,"./util/isFunction":525}],516:[function(require,module,exports){
-"use strict";
-var isArray_1 = require('./util/isArray');
-var isObject_1 = require('./util/isObject');
-var isFunction_1 = require('./util/isFunction');
-var tryCatch_1 = require('./util/tryCatch');
-var errorObject_1 = require('./util/errorObject');
-var UnsubscriptionError_1 = require('./util/UnsubscriptionError');
-/**
- * Represents a disposable resource, such as the execution of an Observable. A
- * Subscription has one important method, `unsubscribe`, that takes no argument
- * and just disposes the resource held by the subscription.
- *
- * Additionally, subscriptions may be grouped together through the `add()`
- * method, which will attach a child Subscription to the current Subscription.
- * When a Subscription is unsubscribed, all its children (and its grandchildren)
- * will be unsubscribed as well.
- *
- * @class Subscription
- */
-var Subscription = (function () {
-    /**
-     * @param {function(): void} [unsubscribe] A function describing how to
-     * perform the disposal of resources when the `unsubscribe` method is called.
-     */
-    function Subscription(unsubscribe) {
-        /**
-         * A flag to indicate whether this Subscription has already been unsubscribed.
-         * @type {boolean}
-         */
-        this.closed = false;
-        if (unsubscribe) {
-            this._unsubscribe = unsubscribe;
-        }
-    }
-    /**
-     * Disposes the resources held by the subscription. May, for instance, cancel
-     * an ongoing Observable execution or cancel any other type of work that
-     * started when the Subscription was created.
-     * @return {void}
-     */
-    Subscription.prototype.unsubscribe = function () {
-        var hasErrors = false;
-        var errors;
-        if (this.closed) {
-            return;
-        }
-        this.closed = true;
-        var _a = this, _unsubscribe = _a._unsubscribe, _subscriptions = _a._subscriptions;
-        this._subscriptions = null;
-        if (isFunction_1.isFunction(_unsubscribe)) {
-            var trial = tryCatch_1.tryCatch(_unsubscribe).call(this);
-            if (trial === errorObject_1.errorObject) {
-                hasErrors = true;
-                (errors = errors || []).push(errorObject_1.errorObject.e);
-            }
-        }
-        if (isArray_1.isArray(_subscriptions)) {
-            var index = -1;
-            var len = _subscriptions.length;
-            while (++index < len) {
-                var sub = _subscriptions[index];
-                if (isObject_1.isObject(sub)) {
-                    var trial = tryCatch_1.tryCatch(sub.unsubscribe).call(sub);
-                    if (trial === errorObject_1.errorObject) {
-                        hasErrors = true;
-                        errors = errors || [];
-                        var err = errorObject_1.errorObject.e;
-                        if (err instanceof UnsubscriptionError_1.UnsubscriptionError) {
-                            errors = errors.concat(err.errors);
-                        }
-                        else {
-                            errors.push(err);
-                        }
-                    }
-                }
-            }
-        }
-        if (hasErrors) {
-            throw new UnsubscriptionError_1.UnsubscriptionError(errors);
-        }
-    };
-    /**
-     * Adds a tear down to be called during the unsubscribe() of this
-     * Subscription.
-     *
-     * If the tear down being added is a subscription that is already
-     * unsubscribed, is the same reference `add` is being called on, or is
-     * `Subscription.EMPTY`, it will not be added.
-     *
-     * If this subscription is already in an `closed` state, the passed
-     * tear down logic will be executed immediately.
-     *
-     * @param {TeardownLogic} teardown The additional logic to execute on
-     * teardown.
-     * @return {Subscription} Returns the Subscription used or created to be
-     * added to the inner subscriptions list. This Subscription can be used with
-     * `remove()` to remove the passed teardown logic from the inner subscriptions
-     * list.
-     */
-    Subscription.prototype.add = function (teardown) {
-        if (!teardown || (teardown === Subscription.EMPTY)) {
-            return Subscription.EMPTY;
-        }
-        if (teardown === this) {
-            return this;
-        }
-        var sub = teardown;
-        switch (typeof teardown) {
-            case 'function':
-                sub = new Subscription(teardown);
-            case 'object':
-                if (sub.closed || typeof sub.unsubscribe !== 'function') {
-                    break;
-                }
-                else if (this.closed) {
-                    sub.unsubscribe();
-                }
-                else {
-                    (this._subscriptions || (this._subscriptions = [])).push(sub);
-                }
-                break;
-            default:
-                throw new Error('unrecognized teardown ' + teardown + ' added to Subscription.');
-        }
-        return sub;
-    };
-    /**
-     * Removes a Subscription from the internal list of subscriptions that will
-     * unsubscribe during the unsubscribe process of this Subscription.
-     * @param {Subscription} subscription The subscription to remove.
-     * @return {void}
-     */
-    Subscription.prototype.remove = function (subscription) {
-        // HACK: This might be redundant because of the logic in `add()`
-        if (subscription == null || (subscription === this) || (subscription === Subscription.EMPTY)) {
-            return;
-        }
-        var subscriptions = this._subscriptions;
-        if (subscriptions) {
-            var subscriptionIndex = subscriptions.indexOf(subscription);
-            if (subscriptionIndex !== -1) {
-                subscriptions.splice(subscriptionIndex, 1);
-            }
-        }
-    };
-    Subscription.EMPTY = (function (empty) {
-        empty.closed = true;
-        return empty;
-    }(new Subscription()));
-    return Subscription;
-}());
-exports.Subscription = Subscription;
-
-},{"./util/UnsubscriptionError":522,"./util/errorObject":523,"./util/isArray":524,"./util/isFunction":525,"./util/isObject":526,"./util/tryCatch":529}],517:[function(require,module,exports){
-"use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var root_1 = require('../util/root');
-var Observable_1 = require('../Observable');
-/**
- * We need this JSDoc comment for affecting ESDoc.
- * @extends {Ignored}
- * @hide true
- */
-var PromiseObservable = (function (_super) {
-    __extends(PromiseObservable, _super);
-    function PromiseObservable(promise, scheduler) {
-        _super.call(this);
-        this.promise = promise;
-        this.scheduler = scheduler;
-    }
-    /**
-     * Converts a Promise to an Observable.
-     *
-     * <span class="informal">Returns an Observable that just emits the Promise's
-     * resolved value, then completes.</span>
-     *
-     * Converts an ES2015 Promise or a Promises/A+ spec compliant Promise to an
-     * Observable. If the Promise resolves with a value, the output Observable
-     * emits that resolved value as a `next`, and then completes. If the Promise
-     * is rejected, then the output Observable emits the corresponding Error.
-     *
-     * @example <caption>Convert the Promise returned by Fetch to an Observable</caption>
-     * var result = Rx.Observable.fromPromise(fetch('http://myserver.com/'));
-     * result.subscribe(x => console.log(x), e => console.error(e));
-     *
-     * @see {@link bindCallback}
-     * @see {@link from}
-     *
-     * @param {Promise<T>} promise The promise to be converted.
-     * @param {Scheduler} [scheduler] An optional Scheduler to use for scheduling
-     * the delivery of the resolved value (or the rejection).
-     * @return {Observable<T>} An Observable which wraps the Promise.
-     * @static true
-     * @name fromPromise
-     * @owner Observable
-     */
-    PromiseObservable.create = function (promise, scheduler) {
-        return new PromiseObservable(promise, scheduler);
-    };
-    PromiseObservable.prototype._subscribe = function (subscriber) {
-        var _this = this;
-        var promise = this.promise;
-        var scheduler = this.scheduler;
-        if (scheduler == null) {
-            if (this._isScalar) {
-                if (!subscriber.closed) {
-                    subscriber.next(this.value);
-                    subscriber.complete();
-                }
-            }
-            else {
-                promise.then(function (value) {
-                    _this.value = value;
-                    _this._isScalar = true;
-                    if (!subscriber.closed) {
-                        subscriber.next(value);
-                        subscriber.complete();
-                    }
-                }, function (err) {
-                    if (!subscriber.closed) {
-                        subscriber.error(err);
-                    }
-                })
-                    .then(null, function (err) {
-                    // escape the promise trap, throw unhandled errors
-                    root_1.root.setTimeout(function () { throw err; });
-                });
-            }
-        }
-        else {
-            if (this._isScalar) {
-                if (!subscriber.closed) {
-                    return scheduler.schedule(dispatchNext, 0, { value: this.value, subscriber: subscriber });
-                }
-            }
-            else {
-                promise.then(function (value) {
-                    _this.value = value;
-                    _this._isScalar = true;
-                    if (!subscriber.closed) {
-                        subscriber.add(scheduler.schedule(dispatchNext, 0, { value: value, subscriber: subscriber }));
-                    }
-                }, function (err) {
-                    if (!subscriber.closed) {
-                        subscriber.add(scheduler.schedule(dispatchError, 0, { err: err, subscriber: subscriber }));
-                    }
-                })
-                    .then(null, function (err) {
-                    // escape the promise trap, throw unhandled errors
-                    root_1.root.setTimeout(function () { throw err; });
-                });
-            }
-        }
-    };
-    return PromiseObservable;
-}(Observable_1.Observable));
-exports.PromiseObservable = PromiseObservable;
-function dispatchNext(arg) {
-    var value = arg.value, subscriber = arg.subscriber;
-    if (!subscriber.closed) {
-        subscriber.next(value);
-        subscriber.complete();
-    }
-}
-function dispatchError(arg) {
-    var err = arg.err, subscriber = arg.subscriber;
-    if (!subscriber.closed) {
-        subscriber.error(err);
-    }
-}
-
-},{"../Observable":511,"../util/root":527}],518:[function(require,module,exports){
-"use strict";
-var root_1 = require('../util/root');
-/* tslint:disable:max-line-length */
-function toPromise(PromiseCtor) {
-    var _this = this;
-    if (!PromiseCtor) {
-        if (root_1.root.Rx && root_1.root.Rx.config && root_1.root.Rx.config.Promise) {
-            PromiseCtor = root_1.root.Rx.config.Promise;
-        }
-        else if (root_1.root.Promise) {
-            PromiseCtor = root_1.root.Promise;
-        }
-    }
-    if (!PromiseCtor) {
-        throw new Error('no Promise impl found');
-    }
-    return new PromiseCtor(function (resolve, reject) {
-        var value;
-        _this.subscribe(function (x) { return value = x; }, function (err) { return reject(err); }, function () { return resolve(value); });
-    });
-}
-exports.toPromise = toPromise;
-
-},{"../util/root":527}],519:[function(require,module,exports){
-"use strict";
-var root_1 = require('../util/root');
-function getSymbolObservable(context) {
-    var $$observable;
-    var Symbol = context.Symbol;
-    if (typeof Symbol === 'function') {
-        if (Symbol.observable) {
-            $$observable = Symbol.observable;
-        }
-        else {
-            $$observable = Symbol('observable');
-            Symbol.observable = $$observable;
-        }
-    }
-    else {
-        $$observable = '@@observable';
-    }
-    return $$observable;
-}
-exports.getSymbolObservable = getSymbolObservable;
-exports.$$observable = getSymbolObservable(root_1.root);
-
-},{"../util/root":527}],520:[function(require,module,exports){
-"use strict";
-var root_1 = require('../util/root');
-var Symbol = root_1.root.Symbol;
-exports.$$rxSubscriber = (typeof Symbol === 'function' && typeof Symbol.for === 'function') ?
-    Symbol.for('rxSubscriber') : '@@rxSubscriber';
-
-},{"../util/root":527}],521:[function(require,module,exports){
-"use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-/**
- * An error thrown when an action is invalid because the object has been
- * unsubscribed.
- *
- * @see {@link Subject}
- * @see {@link BehaviorSubject}
- *
- * @class ObjectUnsubscribedError
- */
-var ObjectUnsubscribedError = (function (_super) {
-    __extends(ObjectUnsubscribedError, _super);
-    function ObjectUnsubscribedError() {
-        var err = _super.call(this, 'object unsubscribed');
-        this.name = err.name = 'ObjectUnsubscribedError';
-        this.stack = err.stack;
-        this.message = err.message;
-    }
-    return ObjectUnsubscribedError;
-}(Error));
-exports.ObjectUnsubscribedError = ObjectUnsubscribedError;
-
-},{}],522:[function(require,module,exports){
-"use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-/**
- * An error thrown when one or more errors have occurred during the
- * `unsubscribe` of a {@link Subscription}.
- */
-var UnsubscriptionError = (function (_super) {
-    __extends(UnsubscriptionError, _super);
-    function UnsubscriptionError(errors) {
-        _super.call(this);
-        this.errors = errors;
-        var err = Error.call(this, errors ?
-            errors.length + " errors occurred during unsubscription:\n  " + errors.map(function (err, i) { return ((i + 1) + ") " + err.toString()); }).join('\n  ') : '');
-        this.name = err.name = 'UnsubscriptionError';
-        this.stack = err.stack;
-        this.message = err.message;
-    }
-    return UnsubscriptionError;
-}(Error));
-exports.UnsubscriptionError = UnsubscriptionError;
-
-},{}],523:[function(require,module,exports){
-"use strict";
-// typeof any so that it we don't have to cast when comparing a result to the error object
-exports.errorObject = { e: {} };
-
-},{}],524:[function(require,module,exports){
-"use strict";
-exports.isArray = Array.isArray || (function (x) { return x && typeof x.length === 'number'; });
-
-},{}],525:[function(require,module,exports){
-"use strict";
-function isFunction(x) {
-    return typeof x === 'function';
-}
-exports.isFunction = isFunction;
-
-},{}],526:[function(require,module,exports){
-"use strict";
-function isObject(x) {
-    return x != null && typeof x === 'object';
-}
-exports.isObject = isObject;
-
-},{}],527:[function(require,module,exports){
-(function (global){
-"use strict";
-/**
- * window: browser in DOM main thread
- * self: browser in WebWorker
- * global: Node.js/other
- */
-exports.root = (typeof window == 'object' && window.window === window && window
-    || typeof self == 'object' && self.self === self && self
-    || typeof global == 'object' && global.global === global && global);
-if (!exports.root) {
-    throw new Error('RxJS could not find any global context (window, self, global)');
-}
-
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-
-},{}],528:[function(require,module,exports){
-"use strict";
-var Subscriber_1 = require('../Subscriber');
-var rxSubscriber_1 = require('../symbol/rxSubscriber');
-var Observer_1 = require('../Observer');
-function toSubscriber(nextOrObserver, error, complete) {
-    if (nextOrObserver) {
-        if (nextOrObserver instanceof Subscriber_1.Subscriber) {
-            return nextOrObserver;
-        }
-        if (nextOrObserver[rxSubscriber_1.$$rxSubscriber]) {
-            return nextOrObserver[rxSubscriber_1.$$rxSubscriber]();
-        }
-    }
-    if (!nextOrObserver && !error && !complete) {
-        return new Subscriber_1.Subscriber(Observer_1.empty);
-    }
-    return new Subscriber_1.Subscriber(nextOrObserver, error, complete);
-}
-exports.toSubscriber = toSubscriber;
-
-},{"../Observer":512,"../Subscriber":515,"../symbol/rxSubscriber":520}],529:[function(require,module,exports){
-"use strict";
-var errorObject_1 = require('./errorObject');
-var tryCatchTarget;
-function tryCatcher() {
-    try {
-        return tryCatchTarget.apply(this, arguments);
-    }
-    catch (e) {
-        errorObject_1.errorObject.e = e;
-        return errorObject_1.errorObject;
-    }
-}
-function tryCatch(fn) {
-    tryCatchTarget = fn;
-    return tryCatcher;
-}
-exports.tryCatch = tryCatch;
-;
-
-},{"./errorObject":523}],530:[function(require,module,exports){
-
-},{}],531:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.1.1
  * https://jquery.com/
@@ -96754,7 +95696,1065 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
-},{}]},{},[1,530])
+},{}],512:[function(require,module,exports){
+"use strict";
+var root_1 = require('./util/root');
+var toSubscriber_1 = require('./util/toSubscriber');
+var observable_1 = require('./symbol/observable');
+/**
+ * A representation of any set of values over any amount of time. This the most basic building block
+ * of RxJS.
+ *
+ * @class Observable<T>
+ */
+var Observable = (function () {
+    /**
+     * @constructor
+     * @param {Function} subscribe the function that is  called when the Observable is
+     * initially subscribed to. This function is given a Subscriber, to which new values
+     * can be `next`ed, or an `error` method can be called to raise an error, or
+     * `complete` can be called to notify of a successful completion.
+     */
+    function Observable(subscribe) {
+        this._isScalar = false;
+        if (subscribe) {
+            this._subscribe = subscribe;
+        }
+    }
+    /**
+     * Creates a new Observable, with this Observable as the source, and the passed
+     * operator defined as the new observable's operator.
+     * @method lift
+     * @param {Operator} operator the operator defining the operation to take on the observable
+     * @return {Observable} a new observable with the Operator applied
+     */
+    Observable.prototype.lift = function (operator) {
+        var observable = new Observable();
+        observable.source = this;
+        observable.operator = operator;
+        return observable;
+    };
+    Observable.prototype.subscribe = function (observerOrNext, error, complete) {
+        var operator = this.operator;
+        var sink = toSubscriber_1.toSubscriber(observerOrNext, error, complete);
+        if (operator) {
+            operator.call(sink, this);
+        }
+        else {
+            sink.add(this._subscribe(sink));
+        }
+        if (sink.syncErrorThrowable) {
+            sink.syncErrorThrowable = false;
+            if (sink.syncErrorThrown) {
+                throw sink.syncErrorValue;
+            }
+        }
+        return sink;
+    };
+    /**
+     * @method forEach
+     * @param {Function} next a handler for each value emitted by the observable
+     * @param {PromiseConstructor} [PromiseCtor] a constructor function used to instantiate the Promise
+     * @return {Promise} a promise that either resolves on observable completion or
+     *  rejects with the handled error
+     */
+    Observable.prototype.forEach = function (next, PromiseCtor) {
+        var _this = this;
+        if (!PromiseCtor) {
+            if (root_1.root.Rx && root_1.root.Rx.config && root_1.root.Rx.config.Promise) {
+                PromiseCtor = root_1.root.Rx.config.Promise;
+            }
+            else if (root_1.root.Promise) {
+                PromiseCtor = root_1.root.Promise;
+            }
+        }
+        if (!PromiseCtor) {
+            throw new Error('no Promise impl found');
+        }
+        return new PromiseCtor(function (resolve, reject) {
+            var subscription = _this.subscribe(function (value) {
+                if (subscription) {
+                    // if there is a subscription, then we can surmise
+                    // the next handling is asynchronous. Any errors thrown
+                    // need to be rejected explicitly and unsubscribe must be
+                    // called manually
+                    try {
+                        next(value);
+                    }
+                    catch (err) {
+                        reject(err);
+                        subscription.unsubscribe();
+                    }
+                }
+                else {
+                    // if there is NO subscription, then we're getting a nexted
+                    // value synchronously during subscription. We can just call it.
+                    // If it errors, Observable's `subscribe` will ensure the
+                    // unsubscription logic is called, then synchronously rethrow the error.
+                    // After that, Promise will trap the error and send it
+                    // down the rejection path.
+                    next(value);
+                }
+            }, reject, resolve);
+        });
+    };
+    Observable.prototype._subscribe = function (subscriber) {
+        return this.source.subscribe(subscriber);
+    };
+    /**
+     * An interop point defined by the es7-observable spec https://github.com/zenparsing/es-observable
+     * @method Symbol.observable
+     * @return {Observable} this instance of the observable
+     */
+    Observable.prototype[observable_1.$$observable] = function () {
+        return this;
+    };
+    // HACK: Since TypeScript inherits static properties too, we have to
+    // fight against TypeScript here so Subject can have a different static create signature
+    /**
+     * Creates a new cold Observable by calling the Observable constructor
+     * @static true
+     * @owner Observable
+     * @method create
+     * @param {Function} subscribe? the subscriber function to be passed to the Observable constructor
+     * @return {Observable} a new cold observable
+     */
+    Observable.create = function (subscribe) {
+        return new Observable(subscribe);
+    };
+    return Observable;
+}());
+exports.Observable = Observable;
+
+},{"./symbol/observable":520,"./util/root":528,"./util/toSubscriber":529}],513:[function(require,module,exports){
+"use strict";
+exports.empty = {
+    closed: true,
+    next: function (value) { },
+    error: function (err) { throw err; },
+    complete: function () { }
+};
+
+},{}],514:[function(require,module,exports){
+"use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var Observable_1 = require('./Observable');
+var Subscriber_1 = require('./Subscriber');
+var Subscription_1 = require('./Subscription');
+var ObjectUnsubscribedError_1 = require('./util/ObjectUnsubscribedError');
+var SubjectSubscription_1 = require('./SubjectSubscription');
+var rxSubscriber_1 = require('./symbol/rxSubscriber');
+/**
+ * @class SubjectSubscriber<T>
+ */
+var SubjectSubscriber = (function (_super) {
+    __extends(SubjectSubscriber, _super);
+    function SubjectSubscriber(destination) {
+        _super.call(this, destination);
+        this.destination = destination;
+    }
+    return SubjectSubscriber;
+}(Subscriber_1.Subscriber));
+exports.SubjectSubscriber = SubjectSubscriber;
+/**
+ * @class Subject<T>
+ */
+var Subject = (function (_super) {
+    __extends(Subject, _super);
+    function Subject() {
+        _super.call(this);
+        this.observers = [];
+        this.closed = false;
+        this.isStopped = false;
+        this.hasError = false;
+        this.thrownError = null;
+    }
+    Subject.prototype[rxSubscriber_1.$$rxSubscriber] = function () {
+        return new SubjectSubscriber(this);
+    };
+    Subject.prototype.lift = function (operator) {
+        var subject = new AnonymousSubject(this, this);
+        subject.operator = operator;
+        return subject;
+    };
+    Subject.prototype.next = function (value) {
+        if (this.closed) {
+            throw new ObjectUnsubscribedError_1.ObjectUnsubscribedError();
+        }
+        if (!this.isStopped) {
+            var observers = this.observers;
+            var len = observers.length;
+            var copy = observers.slice();
+            for (var i = 0; i < len; i++) {
+                copy[i].next(value);
+            }
+        }
+    };
+    Subject.prototype.error = function (err) {
+        if (this.closed) {
+            throw new ObjectUnsubscribedError_1.ObjectUnsubscribedError();
+        }
+        this.hasError = true;
+        this.thrownError = err;
+        this.isStopped = true;
+        var observers = this.observers;
+        var len = observers.length;
+        var copy = observers.slice();
+        for (var i = 0; i < len; i++) {
+            copy[i].error(err);
+        }
+        this.observers.length = 0;
+    };
+    Subject.prototype.complete = function () {
+        if (this.closed) {
+            throw new ObjectUnsubscribedError_1.ObjectUnsubscribedError();
+        }
+        this.isStopped = true;
+        var observers = this.observers;
+        var len = observers.length;
+        var copy = observers.slice();
+        for (var i = 0; i < len; i++) {
+            copy[i].complete();
+        }
+        this.observers.length = 0;
+    };
+    Subject.prototype.unsubscribe = function () {
+        this.isStopped = true;
+        this.closed = true;
+        this.observers = null;
+    };
+    Subject.prototype._subscribe = function (subscriber) {
+        if (this.closed) {
+            throw new ObjectUnsubscribedError_1.ObjectUnsubscribedError();
+        }
+        else if (this.hasError) {
+            subscriber.error(this.thrownError);
+            return Subscription_1.Subscription.EMPTY;
+        }
+        else if (this.isStopped) {
+            subscriber.complete();
+            return Subscription_1.Subscription.EMPTY;
+        }
+        else {
+            this.observers.push(subscriber);
+            return new SubjectSubscription_1.SubjectSubscription(this, subscriber);
+        }
+    };
+    Subject.prototype.asObservable = function () {
+        var observable = new Observable_1.Observable();
+        observable.source = this;
+        return observable;
+    };
+    Subject.create = function (destination, source) {
+        return new AnonymousSubject(destination, source);
+    };
+    return Subject;
+}(Observable_1.Observable));
+exports.Subject = Subject;
+/**
+ * @class AnonymousSubject<T>
+ */
+var AnonymousSubject = (function (_super) {
+    __extends(AnonymousSubject, _super);
+    function AnonymousSubject(destination, source) {
+        _super.call(this);
+        this.destination = destination;
+        this.source = source;
+    }
+    AnonymousSubject.prototype.next = function (value) {
+        var destination = this.destination;
+        if (destination && destination.next) {
+            destination.next(value);
+        }
+    };
+    AnonymousSubject.prototype.error = function (err) {
+        var destination = this.destination;
+        if (destination && destination.error) {
+            this.destination.error(err);
+        }
+    };
+    AnonymousSubject.prototype.complete = function () {
+        var destination = this.destination;
+        if (destination && destination.complete) {
+            this.destination.complete();
+        }
+    };
+    AnonymousSubject.prototype._subscribe = function (subscriber) {
+        var source = this.source;
+        if (source) {
+            return this.source.subscribe(subscriber);
+        }
+        else {
+            return Subscription_1.Subscription.EMPTY;
+        }
+    };
+    return AnonymousSubject;
+}(Subject));
+exports.AnonymousSubject = AnonymousSubject;
+
+},{"./Observable":512,"./SubjectSubscription":515,"./Subscriber":516,"./Subscription":517,"./symbol/rxSubscriber":521,"./util/ObjectUnsubscribedError":522}],515:[function(require,module,exports){
+"use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var Subscription_1 = require('./Subscription');
+/**
+ * We need this JSDoc comment for affecting ESDoc.
+ * @ignore
+ * @extends {Ignored}
+ */
+var SubjectSubscription = (function (_super) {
+    __extends(SubjectSubscription, _super);
+    function SubjectSubscription(subject, subscriber) {
+        _super.call(this);
+        this.subject = subject;
+        this.subscriber = subscriber;
+        this.closed = false;
+    }
+    SubjectSubscription.prototype.unsubscribe = function () {
+        if (this.closed) {
+            return;
+        }
+        this.closed = true;
+        var subject = this.subject;
+        var observers = subject.observers;
+        this.subject = null;
+        if (!observers || observers.length === 0 || subject.isStopped || subject.closed) {
+            return;
+        }
+        var subscriberIndex = observers.indexOf(this.subscriber);
+        if (subscriberIndex !== -1) {
+            observers.splice(subscriberIndex, 1);
+        }
+    };
+    return SubjectSubscription;
+}(Subscription_1.Subscription));
+exports.SubjectSubscription = SubjectSubscription;
+
+},{"./Subscription":517}],516:[function(require,module,exports){
+"use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var isFunction_1 = require('./util/isFunction');
+var Subscription_1 = require('./Subscription');
+var Observer_1 = require('./Observer');
+var rxSubscriber_1 = require('./symbol/rxSubscriber');
+/**
+ * Implements the {@link Observer} interface and extends the
+ * {@link Subscription} class. While the {@link Observer} is the public API for
+ * consuming the values of an {@link Observable}, all Observers get converted to
+ * a Subscriber, in order to provide Subscription-like capabilities such as
+ * `unsubscribe`. Subscriber is a common type in RxJS, and crucial for
+ * implementing operators, but it is rarely used as a public API.
+ *
+ * @class Subscriber<T>
+ */
+var Subscriber = (function (_super) {
+    __extends(Subscriber, _super);
+    /**
+     * @param {Observer|function(value: T): void} [destinationOrNext] A partially
+     * defined Observer or a `next` callback function.
+     * @param {function(e: ?any): void} [error] The `error` callback of an
+     * Observer.
+     * @param {function(): void} [complete] The `complete` callback of an
+     * Observer.
+     */
+    function Subscriber(destinationOrNext, error, complete) {
+        _super.call(this);
+        this.syncErrorValue = null;
+        this.syncErrorThrown = false;
+        this.syncErrorThrowable = false;
+        this.isStopped = false;
+        switch (arguments.length) {
+            case 0:
+                this.destination = Observer_1.empty;
+                break;
+            case 1:
+                if (!destinationOrNext) {
+                    this.destination = Observer_1.empty;
+                    break;
+                }
+                if (typeof destinationOrNext === 'object') {
+                    if (destinationOrNext instanceof Subscriber) {
+                        this.destination = destinationOrNext;
+                        this.destination.add(this);
+                    }
+                    else {
+                        this.syncErrorThrowable = true;
+                        this.destination = new SafeSubscriber(this, destinationOrNext);
+                    }
+                    break;
+                }
+            default:
+                this.syncErrorThrowable = true;
+                this.destination = new SafeSubscriber(this, destinationOrNext, error, complete);
+                break;
+        }
+    }
+    Subscriber.prototype[rxSubscriber_1.$$rxSubscriber] = function () { return this; };
+    /**
+     * A static factory for a Subscriber, given a (potentially partial) definition
+     * of an Observer.
+     * @param {function(x: ?T): void} [next] The `next` callback of an Observer.
+     * @param {function(e: ?any): void} [error] The `error` callback of an
+     * Observer.
+     * @param {function(): void} [complete] The `complete` callback of an
+     * Observer.
+     * @return {Subscriber<T>} A Subscriber wrapping the (partially defined)
+     * Observer represented by the given arguments.
+     */
+    Subscriber.create = function (next, error, complete) {
+        var subscriber = new Subscriber(next, error, complete);
+        subscriber.syncErrorThrowable = false;
+        return subscriber;
+    };
+    /**
+     * The {@link Observer} callback to receive notifications of type `next` from
+     * the Observable, with a value. The Observable may call this method 0 or more
+     * times.
+     * @param {T} [value] The `next` value.
+     * @return {void}
+     */
+    Subscriber.prototype.next = function (value) {
+        if (!this.isStopped) {
+            this._next(value);
+        }
+    };
+    /**
+     * The {@link Observer} callback to receive notifications of type `error` from
+     * the Observable, with an attached {@link Error}. Notifies the Observer that
+     * the Observable has experienced an error condition.
+     * @param {any} [err] The `error` exception.
+     * @return {void}
+     */
+    Subscriber.prototype.error = function (err) {
+        if (!this.isStopped) {
+            this.isStopped = true;
+            this._error(err);
+        }
+    };
+    /**
+     * The {@link Observer} callback to receive a valueless notification of type
+     * `complete` from the Observable. Notifies the Observer that the Observable
+     * has finished sending push-based notifications.
+     * @return {void}
+     */
+    Subscriber.prototype.complete = function () {
+        if (!this.isStopped) {
+            this.isStopped = true;
+            this._complete();
+        }
+    };
+    Subscriber.prototype.unsubscribe = function () {
+        if (this.closed) {
+            return;
+        }
+        this.isStopped = true;
+        _super.prototype.unsubscribe.call(this);
+    };
+    Subscriber.prototype._next = function (value) {
+        this.destination.next(value);
+    };
+    Subscriber.prototype._error = function (err) {
+        this.destination.error(err);
+        this.unsubscribe();
+    };
+    Subscriber.prototype._complete = function () {
+        this.destination.complete();
+        this.unsubscribe();
+    };
+    return Subscriber;
+}(Subscription_1.Subscription));
+exports.Subscriber = Subscriber;
+/**
+ * We need this JSDoc comment for affecting ESDoc.
+ * @ignore
+ * @extends {Ignored}
+ */
+var SafeSubscriber = (function (_super) {
+    __extends(SafeSubscriber, _super);
+    function SafeSubscriber(_parent, observerOrNext, error, complete) {
+        _super.call(this);
+        this._parent = _parent;
+        var next;
+        var context = this;
+        if (isFunction_1.isFunction(observerOrNext)) {
+            next = observerOrNext;
+        }
+        else if (observerOrNext) {
+            context = observerOrNext;
+            next = observerOrNext.next;
+            error = observerOrNext.error;
+            complete = observerOrNext.complete;
+            if (isFunction_1.isFunction(context.unsubscribe)) {
+                this.add(context.unsubscribe.bind(context));
+            }
+            context.unsubscribe = this.unsubscribe.bind(this);
+        }
+        this._context = context;
+        this._next = next;
+        this._error = error;
+        this._complete = complete;
+    }
+    SafeSubscriber.prototype.next = function (value) {
+        if (!this.isStopped && this._next) {
+            var _parent = this._parent;
+            if (!_parent.syncErrorThrowable) {
+                this.__tryOrUnsub(this._next, value);
+            }
+            else if (this.__tryOrSetError(_parent, this._next, value)) {
+                this.unsubscribe();
+            }
+        }
+    };
+    SafeSubscriber.prototype.error = function (err) {
+        if (!this.isStopped) {
+            var _parent = this._parent;
+            if (this._error) {
+                if (!_parent.syncErrorThrowable) {
+                    this.__tryOrUnsub(this._error, err);
+                    this.unsubscribe();
+                }
+                else {
+                    this.__tryOrSetError(_parent, this._error, err);
+                    this.unsubscribe();
+                }
+            }
+            else if (!_parent.syncErrorThrowable) {
+                this.unsubscribe();
+                throw err;
+            }
+            else {
+                _parent.syncErrorValue = err;
+                _parent.syncErrorThrown = true;
+                this.unsubscribe();
+            }
+        }
+    };
+    SafeSubscriber.prototype.complete = function () {
+        if (!this.isStopped) {
+            var _parent = this._parent;
+            if (this._complete) {
+                if (!_parent.syncErrorThrowable) {
+                    this.__tryOrUnsub(this._complete);
+                    this.unsubscribe();
+                }
+                else {
+                    this.__tryOrSetError(_parent, this._complete);
+                    this.unsubscribe();
+                }
+            }
+            else {
+                this.unsubscribe();
+            }
+        }
+    };
+    SafeSubscriber.prototype.__tryOrUnsub = function (fn, value) {
+        try {
+            fn.call(this._context, value);
+        }
+        catch (err) {
+            this.unsubscribe();
+            throw err;
+        }
+    };
+    SafeSubscriber.prototype.__tryOrSetError = function (parent, fn, value) {
+        try {
+            fn.call(this._context, value);
+        }
+        catch (err) {
+            parent.syncErrorValue = err;
+            parent.syncErrorThrown = true;
+            return true;
+        }
+        return false;
+    };
+    SafeSubscriber.prototype._unsubscribe = function () {
+        var _parent = this._parent;
+        this._context = null;
+        this._parent = null;
+        _parent.unsubscribe();
+    };
+    return SafeSubscriber;
+}(Subscriber));
+
+},{"./Observer":513,"./Subscription":517,"./symbol/rxSubscriber":521,"./util/isFunction":526}],517:[function(require,module,exports){
+"use strict";
+var isArray_1 = require('./util/isArray');
+var isObject_1 = require('./util/isObject');
+var isFunction_1 = require('./util/isFunction');
+var tryCatch_1 = require('./util/tryCatch');
+var errorObject_1 = require('./util/errorObject');
+var UnsubscriptionError_1 = require('./util/UnsubscriptionError');
+/**
+ * Represents a disposable resource, such as the execution of an Observable. A
+ * Subscription has one important method, `unsubscribe`, that takes no argument
+ * and just disposes the resource held by the subscription.
+ *
+ * Additionally, subscriptions may be grouped together through the `add()`
+ * method, which will attach a child Subscription to the current Subscription.
+ * When a Subscription is unsubscribed, all its children (and its grandchildren)
+ * will be unsubscribed as well.
+ *
+ * @class Subscription
+ */
+var Subscription = (function () {
+    /**
+     * @param {function(): void} [unsubscribe] A function describing how to
+     * perform the disposal of resources when the `unsubscribe` method is called.
+     */
+    function Subscription(unsubscribe) {
+        /**
+         * A flag to indicate whether this Subscription has already been unsubscribed.
+         * @type {boolean}
+         */
+        this.closed = false;
+        if (unsubscribe) {
+            this._unsubscribe = unsubscribe;
+        }
+    }
+    /**
+     * Disposes the resources held by the subscription. May, for instance, cancel
+     * an ongoing Observable execution or cancel any other type of work that
+     * started when the Subscription was created.
+     * @return {void}
+     */
+    Subscription.prototype.unsubscribe = function () {
+        var hasErrors = false;
+        var errors;
+        if (this.closed) {
+            return;
+        }
+        this.closed = true;
+        var _a = this, _unsubscribe = _a._unsubscribe, _subscriptions = _a._subscriptions;
+        this._subscriptions = null;
+        if (isFunction_1.isFunction(_unsubscribe)) {
+            var trial = tryCatch_1.tryCatch(_unsubscribe).call(this);
+            if (trial === errorObject_1.errorObject) {
+                hasErrors = true;
+                (errors = errors || []).push(errorObject_1.errorObject.e);
+            }
+        }
+        if (isArray_1.isArray(_subscriptions)) {
+            var index = -1;
+            var len = _subscriptions.length;
+            while (++index < len) {
+                var sub = _subscriptions[index];
+                if (isObject_1.isObject(sub)) {
+                    var trial = tryCatch_1.tryCatch(sub.unsubscribe).call(sub);
+                    if (trial === errorObject_1.errorObject) {
+                        hasErrors = true;
+                        errors = errors || [];
+                        var err = errorObject_1.errorObject.e;
+                        if (err instanceof UnsubscriptionError_1.UnsubscriptionError) {
+                            errors = errors.concat(err.errors);
+                        }
+                        else {
+                            errors.push(err);
+                        }
+                    }
+                }
+            }
+        }
+        if (hasErrors) {
+            throw new UnsubscriptionError_1.UnsubscriptionError(errors);
+        }
+    };
+    /**
+     * Adds a tear down to be called during the unsubscribe() of this
+     * Subscription.
+     *
+     * If the tear down being added is a subscription that is already
+     * unsubscribed, is the same reference `add` is being called on, or is
+     * `Subscription.EMPTY`, it will not be added.
+     *
+     * If this subscription is already in an `closed` state, the passed
+     * tear down logic will be executed immediately.
+     *
+     * @param {TeardownLogic} teardown The additional logic to execute on
+     * teardown.
+     * @return {Subscription} Returns the Subscription used or created to be
+     * added to the inner subscriptions list. This Subscription can be used with
+     * `remove()` to remove the passed teardown logic from the inner subscriptions
+     * list.
+     */
+    Subscription.prototype.add = function (teardown) {
+        if (!teardown || (teardown === Subscription.EMPTY)) {
+            return Subscription.EMPTY;
+        }
+        if (teardown === this) {
+            return this;
+        }
+        var sub = teardown;
+        switch (typeof teardown) {
+            case 'function':
+                sub = new Subscription(teardown);
+            case 'object':
+                if (sub.closed || typeof sub.unsubscribe !== 'function') {
+                    break;
+                }
+                else if (this.closed) {
+                    sub.unsubscribe();
+                }
+                else {
+                    (this._subscriptions || (this._subscriptions = [])).push(sub);
+                }
+                break;
+            default:
+                throw new Error('unrecognized teardown ' + teardown + ' added to Subscription.');
+        }
+        return sub;
+    };
+    /**
+     * Removes a Subscription from the internal list of subscriptions that will
+     * unsubscribe during the unsubscribe process of this Subscription.
+     * @param {Subscription} subscription The subscription to remove.
+     * @return {void}
+     */
+    Subscription.prototype.remove = function (subscription) {
+        // HACK: This might be redundant because of the logic in `add()`
+        if (subscription == null || (subscription === this) || (subscription === Subscription.EMPTY)) {
+            return;
+        }
+        var subscriptions = this._subscriptions;
+        if (subscriptions) {
+            var subscriptionIndex = subscriptions.indexOf(subscription);
+            if (subscriptionIndex !== -1) {
+                subscriptions.splice(subscriptionIndex, 1);
+            }
+        }
+    };
+    Subscription.EMPTY = (function (empty) {
+        empty.closed = true;
+        return empty;
+    }(new Subscription()));
+    return Subscription;
+}());
+exports.Subscription = Subscription;
+
+},{"./util/UnsubscriptionError":523,"./util/errorObject":524,"./util/isArray":525,"./util/isFunction":526,"./util/isObject":527,"./util/tryCatch":530}],518:[function(require,module,exports){
+"use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var root_1 = require('../util/root');
+var Observable_1 = require('../Observable');
+/**
+ * We need this JSDoc comment for affecting ESDoc.
+ * @extends {Ignored}
+ * @hide true
+ */
+var PromiseObservable = (function (_super) {
+    __extends(PromiseObservable, _super);
+    function PromiseObservable(promise, scheduler) {
+        _super.call(this);
+        this.promise = promise;
+        this.scheduler = scheduler;
+    }
+    /**
+     * Converts a Promise to an Observable.
+     *
+     * <span class="informal">Returns an Observable that just emits the Promise's
+     * resolved value, then completes.</span>
+     *
+     * Converts an ES2015 Promise or a Promises/A+ spec compliant Promise to an
+     * Observable. If the Promise resolves with a value, the output Observable
+     * emits that resolved value as a `next`, and then completes. If the Promise
+     * is rejected, then the output Observable emits the corresponding Error.
+     *
+     * @example <caption>Convert the Promise returned by Fetch to an Observable</caption>
+     * var result = Rx.Observable.fromPromise(fetch('http://myserver.com/'));
+     * result.subscribe(x => console.log(x), e => console.error(e));
+     *
+     * @see {@link bindCallback}
+     * @see {@link from}
+     *
+     * @param {Promise<T>} promise The promise to be converted.
+     * @param {Scheduler} [scheduler] An optional Scheduler to use for scheduling
+     * the delivery of the resolved value (or the rejection).
+     * @return {Observable<T>} An Observable which wraps the Promise.
+     * @static true
+     * @name fromPromise
+     * @owner Observable
+     */
+    PromiseObservable.create = function (promise, scheduler) {
+        return new PromiseObservable(promise, scheduler);
+    };
+    PromiseObservable.prototype._subscribe = function (subscriber) {
+        var _this = this;
+        var promise = this.promise;
+        var scheduler = this.scheduler;
+        if (scheduler == null) {
+            if (this._isScalar) {
+                if (!subscriber.closed) {
+                    subscriber.next(this.value);
+                    subscriber.complete();
+                }
+            }
+            else {
+                promise.then(function (value) {
+                    _this.value = value;
+                    _this._isScalar = true;
+                    if (!subscriber.closed) {
+                        subscriber.next(value);
+                        subscriber.complete();
+                    }
+                }, function (err) {
+                    if (!subscriber.closed) {
+                        subscriber.error(err);
+                    }
+                })
+                    .then(null, function (err) {
+                    // escape the promise trap, throw unhandled errors
+                    root_1.root.setTimeout(function () { throw err; });
+                });
+            }
+        }
+        else {
+            if (this._isScalar) {
+                if (!subscriber.closed) {
+                    return scheduler.schedule(dispatchNext, 0, { value: this.value, subscriber: subscriber });
+                }
+            }
+            else {
+                promise.then(function (value) {
+                    _this.value = value;
+                    _this._isScalar = true;
+                    if (!subscriber.closed) {
+                        subscriber.add(scheduler.schedule(dispatchNext, 0, { value: value, subscriber: subscriber }));
+                    }
+                }, function (err) {
+                    if (!subscriber.closed) {
+                        subscriber.add(scheduler.schedule(dispatchError, 0, { err: err, subscriber: subscriber }));
+                    }
+                })
+                    .then(null, function (err) {
+                    // escape the promise trap, throw unhandled errors
+                    root_1.root.setTimeout(function () { throw err; });
+                });
+            }
+        }
+    };
+    return PromiseObservable;
+}(Observable_1.Observable));
+exports.PromiseObservable = PromiseObservable;
+function dispatchNext(arg) {
+    var value = arg.value, subscriber = arg.subscriber;
+    if (!subscriber.closed) {
+        subscriber.next(value);
+        subscriber.complete();
+    }
+}
+function dispatchError(arg) {
+    var err = arg.err, subscriber = arg.subscriber;
+    if (!subscriber.closed) {
+        subscriber.error(err);
+    }
+}
+
+},{"../Observable":512,"../util/root":528}],519:[function(require,module,exports){
+"use strict";
+var root_1 = require('../util/root');
+/* tslint:disable:max-line-length */
+function toPromise(PromiseCtor) {
+    var _this = this;
+    if (!PromiseCtor) {
+        if (root_1.root.Rx && root_1.root.Rx.config && root_1.root.Rx.config.Promise) {
+            PromiseCtor = root_1.root.Rx.config.Promise;
+        }
+        else if (root_1.root.Promise) {
+            PromiseCtor = root_1.root.Promise;
+        }
+    }
+    if (!PromiseCtor) {
+        throw new Error('no Promise impl found');
+    }
+    return new PromiseCtor(function (resolve, reject) {
+        var value;
+        _this.subscribe(function (x) { return value = x; }, function (err) { return reject(err); }, function () { return resolve(value); });
+    });
+}
+exports.toPromise = toPromise;
+
+},{"../util/root":528}],520:[function(require,module,exports){
+"use strict";
+var root_1 = require('../util/root');
+function getSymbolObservable(context) {
+    var $$observable;
+    var Symbol = context.Symbol;
+    if (typeof Symbol === 'function') {
+        if (Symbol.observable) {
+            $$observable = Symbol.observable;
+        }
+        else {
+            $$observable = Symbol('observable');
+            Symbol.observable = $$observable;
+        }
+    }
+    else {
+        $$observable = '@@observable';
+    }
+    return $$observable;
+}
+exports.getSymbolObservable = getSymbolObservable;
+exports.$$observable = getSymbolObservable(root_1.root);
+
+},{"../util/root":528}],521:[function(require,module,exports){
+"use strict";
+var root_1 = require('../util/root');
+var Symbol = root_1.root.Symbol;
+exports.$$rxSubscriber = (typeof Symbol === 'function' && typeof Symbol.for === 'function') ?
+    Symbol.for('rxSubscriber') : '@@rxSubscriber';
+
+},{"../util/root":528}],522:[function(require,module,exports){
+"use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+/**
+ * An error thrown when an action is invalid because the object has been
+ * unsubscribed.
+ *
+ * @see {@link Subject}
+ * @see {@link BehaviorSubject}
+ *
+ * @class ObjectUnsubscribedError
+ */
+var ObjectUnsubscribedError = (function (_super) {
+    __extends(ObjectUnsubscribedError, _super);
+    function ObjectUnsubscribedError() {
+        var err = _super.call(this, 'object unsubscribed');
+        this.name = err.name = 'ObjectUnsubscribedError';
+        this.stack = err.stack;
+        this.message = err.message;
+    }
+    return ObjectUnsubscribedError;
+}(Error));
+exports.ObjectUnsubscribedError = ObjectUnsubscribedError;
+
+},{}],523:[function(require,module,exports){
+"use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+/**
+ * An error thrown when one or more errors have occurred during the
+ * `unsubscribe` of a {@link Subscription}.
+ */
+var UnsubscriptionError = (function (_super) {
+    __extends(UnsubscriptionError, _super);
+    function UnsubscriptionError(errors) {
+        _super.call(this);
+        this.errors = errors;
+        var err = Error.call(this, errors ?
+            errors.length + " errors occurred during unsubscription:\n  " + errors.map(function (err, i) { return ((i + 1) + ") " + err.toString()); }).join('\n  ') : '');
+        this.name = err.name = 'UnsubscriptionError';
+        this.stack = err.stack;
+        this.message = err.message;
+    }
+    return UnsubscriptionError;
+}(Error));
+exports.UnsubscriptionError = UnsubscriptionError;
+
+},{}],524:[function(require,module,exports){
+"use strict";
+// typeof any so that it we don't have to cast when comparing a result to the error object
+exports.errorObject = { e: {} };
+
+},{}],525:[function(require,module,exports){
+"use strict";
+exports.isArray = Array.isArray || (function (x) { return x && typeof x.length === 'number'; });
+
+},{}],526:[function(require,module,exports){
+"use strict";
+function isFunction(x) {
+    return typeof x === 'function';
+}
+exports.isFunction = isFunction;
+
+},{}],527:[function(require,module,exports){
+"use strict";
+function isObject(x) {
+    return x != null && typeof x === 'object';
+}
+exports.isObject = isObject;
+
+},{}],528:[function(require,module,exports){
+(function (global){
+"use strict";
+/**
+ * window: browser in DOM main thread
+ * self: browser in WebWorker
+ * global: Node.js/other
+ */
+exports.root = (typeof window == 'object' && window.window === window && window
+    || typeof self == 'object' && self.self === self && self
+    || typeof global == 'object' && global.global === global && global);
+if (!exports.root) {
+    throw new Error('RxJS could not find any global context (window, self, global)');
+}
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+
+},{}],529:[function(require,module,exports){
+"use strict";
+var Subscriber_1 = require('../Subscriber');
+var rxSubscriber_1 = require('../symbol/rxSubscriber');
+var Observer_1 = require('../Observer');
+function toSubscriber(nextOrObserver, error, complete) {
+    if (nextOrObserver) {
+        if (nextOrObserver instanceof Subscriber_1.Subscriber) {
+            return nextOrObserver;
+        }
+        if (nextOrObserver[rxSubscriber_1.$$rxSubscriber]) {
+            return nextOrObserver[rxSubscriber_1.$$rxSubscriber]();
+        }
+    }
+    if (!nextOrObserver && !error && !complete) {
+        return new Subscriber_1.Subscriber(Observer_1.empty);
+    }
+    return new Subscriber_1.Subscriber(nextOrObserver, error, complete);
+}
+exports.toSubscriber = toSubscriber;
+
+},{"../Observer":513,"../Subscriber":516,"../symbol/rxSubscriber":521}],530:[function(require,module,exports){
+"use strict";
+var errorObject_1 = require('./errorObject');
+var tryCatchTarget;
+function tryCatcher() {
+    try {
+        return tryCatchTarget.apply(this, arguments);
+    }
+    catch (e) {
+        errorObject_1.errorObject.e = e;
+        return errorObject_1.errorObject;
+    }
+}
+function tryCatch(fn) {
+    tryCatchTarget = fn;
+    return tryCatcher;
+}
+exports.tryCatch = tryCatch;
+;
+
+},{"./errorObject":524}],531:[function(require,module,exports){
+
+},{}]},{},[1,531])
 
 
 //# sourceMappingURL=app.bundle.js.map
